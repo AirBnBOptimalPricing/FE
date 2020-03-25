@@ -1,48 +1,21 @@
-import {
-    LOGIN_START,
-    LOGIN_FAILURE,
-    LOGIN_SUCCESS,
-    REGISTER_START,
-    REGISTER_FAILURE,
-    REGISTER_SUCCESS,
-} from '../actions';
+import { AUTH_START, AUTH_FAILURE, AUTH_SUCCESS } from '../actions';
 
-export const loginStart = () => {
+export const authStart = () => {
     return {
-        type: LOGIN_START,
+        type: AUTH_START,
     };
 };
 
-export const loginSuccess = payload => {
+export const authSuccess = payload => {
     return {
-        type: LOGIN_SUCCESS,
+        type: AUTH_SUCCESS,
         payload,
     };
 };
 
-export const loginFailure = payload => {
+export const authFailure = payload => {
     return {
-        type: LOGIN_FAILURE,
-        payload,
-    };
-};
-
-export const registerStart = () => {
-    return {
-        type: REGISTER_START,
-    };
-};
-
-export const registerSuccess = payload => {
-    return {
-        type: REGISTER_SUCCESS,
-        payload,
-    };
-};
-
-export const registerFailure = payload => {
-    return {
-        type: REGISTER_FAILURE,
+        type: AUTH_FAILURE,
         payload,
     };
 };

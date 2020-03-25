@@ -1,36 +1,22 @@
 import * as Yup from 'yup';
 
+export const defaultAddShape = {
+    address: '1234 abc street',
+    city: '',
+    state: '',
+    zip: '',
+    description: '',
+    canHaveChildren: false,
+    propertyType: '',
+    floors: 1,
+    beds: 2,
+    bath: 3,
+    amenities: '',
+    price: 0,
+};
+
 export const addConfiguration = {
-    mapPropsToValue({
-        address = '',
-        city = '',
-        state = '',
-        zip = '',
-        description = '',
-        canHaveChildren = false,
-        propertyType = '',
-        floors = 1,
-        beds = 0,
-        bath = 0,
-        amenities = '',
-        price = 0,
-    }) {
-        return {
-            // form shape
-            address,
-            city,
-            state,
-            zip,
-            description,
-            canHaveChildren,
-            propertyType,
-            floors,
-            beds,
-            bath,
-            amenities,
-            price,
-        };
-    },
+    mapPropsToValue: () => ({ ...defaultAddShape }),
     validationSchema: Yup.object().shape({
         // form shape goes here with validation
         address: Yup.string().required(),
@@ -44,14 +30,15 @@ export const addConfiguration = {
         description: Yup.string().required(),
         canHaveChildren: Yup.boolean().oneOf([true, false]),
         propertyType: Yup.string().required(), // what kind of property types are there? commerical/residential
-        floors: Yup.number().required(),
-        beds: Yup.number().required(),
-        bath: Yup.number(),
+        floors: Yup.string(),
+        beds: Yup.string(),
+        bath: Yup.string(),
         amenities: Yup.string().required(),
-        price: Yup.number().required(),
+        price: Yup.string().required(),
     }),
-    handleSubmit(values, formikBag) {
+    handleSubmit: (values, formikBag) => {
         // handle submit here
+        console.log(values);
         return;
     },
 };

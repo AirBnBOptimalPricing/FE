@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { withToken } from '../hooks';
+import { withToken } from './';
 
 export const withAuth = (url, method, data) => {
     const token = withToken();

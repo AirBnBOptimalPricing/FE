@@ -31,7 +31,6 @@ function Login({ values, errors, touched, status }) {
                     Don't have an account? <Link to="/register">SignUp</Link>
                 </p>
                 <button type="submit"> LogIn </button>
-                <p>Forgot your password?</p>
             </Form>
         </div>
     );

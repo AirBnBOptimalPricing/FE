@@ -65,8 +65,8 @@ const LoginForm = withFormik({
 
 const mapStateToProps = state => {
     return {
-      isFetching: state.isFetching,
-      error: state.error,
+        isLoading: state.auth.isLoading,
+      error: state.auth.error,
     }
   }
 export default connect(mapStateToProps, {})(LoginForm);

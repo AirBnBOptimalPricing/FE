@@ -111,10 +111,11 @@ const RegistrationForm = withFormik({
             .catch(err => console.error(err));
     },
 })(Register);
+
 const mapStateToProps = state => {
     return {
-        isFetching: state.isFetching,
-        error: state.error,
+        isLoading: state.auth.isLoading,
+        error: state.auth.error,
     };
 };
 

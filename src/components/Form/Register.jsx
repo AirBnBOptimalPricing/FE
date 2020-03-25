@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { withFormik, Form, Field } from 'formik';
+import { withFormik, Form } from 'formik';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import axios from 'axios';
+import { Input } from '../';
 
 const Register = ({ values, errors, touched, status }) => {
     const [users, setUsers] = useState([]);
@@ -12,10 +13,13 @@ const Register = ({ values, errors, touched, status }) => {
     }, [status]);
 
     return (
-        <div className="signUp-form">
+        <div className="form">
+            <header>
+                <h3 className="form-header">Register</h3>
+            </header>
             <Form className="div1">
                 <div className="formCol">
-                    <Field
+                    <Input
                         type="text"
                         name="username"
                         placeholder="Username*"
@@ -24,7 +28,7 @@ const Register = ({ values, errors, touched, status }) => {
                         <p className="errors"> {errors.username}</p>
                     )}
 
-                    <Field
+                    <Input
                         type="password"
                         name="password"
                         placeholder="Password*"
@@ -33,7 +37,7 @@ const Register = ({ values, errors, touched, status }) => {
                         <p className="errors">{errors.password}</p>
                     )}
 
-                    <Field
+                    <Input
                         type="text"
                         name="firstname"
                         placeholder=" First Name*"
@@ -44,7 +48,7 @@ const Register = ({ values, errors, touched, status }) => {
                 </div>
 
                 <div className="formCol">
-                    <Field
+                    <Input
                         type="text"
                         name="lastname"
                         placeholder="lastname*"
@@ -53,7 +57,7 @@ const Register = ({ values, errors, touched, status }) => {
                         <p className="errors"> {errors.lastname}</p>
                     )}
 
-                    <Field type="email" name="email" placeholder="Email*" />
+                    <Input type="email" name="email" placeholder="Email*" />
                     {touched.email && errors.email && (
                         <p className="errors">{errors.email}</p>
                     )}

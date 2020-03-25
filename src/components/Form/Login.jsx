@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { withFormik, Form, Field } from 'formik';
+import { withFormik, Form } from 'formik';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import axios from 'axios';
+import { Input } from '../';
 
 function Login({ values, errors, touched, status }) {
     const [user, setUser] = useState([]);
@@ -12,14 +13,17 @@ function Login({ values, errors, touched, status }) {
     }, [status]);
 
     return (
-        <div className="login-form">
+        <div className="form">
+            <header>
+                <h3 className="form-header">Login</h3>
+            </header>
             <Form className="formCol">
-                <Field type="text" name="username" placeholder="Username" />
+                <Input type="text" name="username" placeholder="Username" />
                 {touched.username && errors.username && (
                     <p>{errors.username}</p>
                 )}
 
-                <Field type="password" name="password" placeholder="Password" />
+                <Input type="password" name="password" placeholder="Password" />
                 {touched.password && errors.password && (
                     <p>{errors.password}</p>
                 )}

@@ -1,3 +1,4 @@
-import { addConfiguration } from './adding';
+import { addConfiguration, defaultAddShape } from './adding';
+import { createEditConfiguration } from './updating';
 
-export { addConfiguration };
+export { addConfiguration, createEditConfiguration, defaultAddShape };

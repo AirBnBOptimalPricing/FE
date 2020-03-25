@@ -1,13 +1,66 @@
+html {
+    font-size: 62.5%;
+}
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+        'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+        'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+        monospace;
+}
+
+form {
+    width: 100vw;
+    display: flex;
+    flex-flow: column;
+    button {
+        width: 30%;
+        padding: 5px 15px;
+        margin: 0 auto;
+        border-radius: 5px;
+        outline: none;
+    }
+
+    p {
+        padding: 0 5%;
+    }
+}
+
+input,
+select {
+    width: 70%;
+    border-radius: 5px;
+}
+
+select {
+    width: 40px;
+}
+
+input {
+    padding: 0 5px;
+    outline: none;
+    margin-bottom: 5px;
+    &[type='checkbox'] {
+        width: auto;
+        margin: 0 5px;
+    }
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.75rem;
 }

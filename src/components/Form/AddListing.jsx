@@ -1,35 +1,108 @@
 import React from 'react';
-import { Form, Field } from 'formik';
-import { useForm } from '../../hooks';
-import { addConfiguration } from './configurations';
+import { Form, withFormik } from 'formik';
+import * as Yup from 'yup';
+import { useOptions } from '../../hooks';
+import { Input } from '../';
+import { withAuth } from '../../util';
 
-const AddListing = () => {
-    const form = () => (
-        <Form>
-            <Field name="address" />
-            <Field name="city" />
-            <Field name="state" />
-            <Field name="zip" />
-            <Field name="description" />
-            <Field name="canHaveChildren" type="checkbox" />
-            <Field name="propertyType" />
-            <Field name="floors" as="select">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-            </Field>
-            <Field name="beds"></Field>
-            <Field name="bath"></Field>
-            <Field name="amenities"></Field>
-            <Field name="price"></Field>
-        </Form>
+const AddForm = ({ errors, touched, initialValues, values }) => {
+    const [floors, bedsAndBaths] = useOptions([{ amount: 5 }, { amount: 7 }]);
+
+    return (
+        <div className="form">
+            <header>
+                <h3 className="form-header">Add a property</h3>
+            </header>
+            <Form>
+                <Input name="address" id="address" />
+                <Input name="city" id="city" />
+                <Input name="state" id="state" />
+                <Input name="zip" id="zip" />
+                <Input name="description" id="description" />
+
+                <Input
+                    name="propertyType"
+                    id="property-type"
+                    altText="Property Type"
+                />
+                <Input name="floors" as="select" id="floors">
+                    {floors}
+                </Input>
+                <Input name="beds" as="select" id="beds">
+                    {bedsAndBaths}
+                </Input>
+                <Input name="baths" as="select" id="baths">
+                    {bedsAndBaths}
+                </Input>
+                <Input name="amenities" id="amenities" />
+                <Input name="price" id="price" />
+                <Input
+                    name="canHaveChildren"
+                    type="checkbox"
+                    id="children"
+                    altText="Children Allowed"
+                    className="checkbox"
+                />
+                <button type="submit">Add Property</button>
+            </Form>
+        </div>
     );
-    const EnhancedAdd = useForm(form, addConfiguration);
-    return <EnhancedAdd />;
 };
 
-export default AddListing;
+// cannot make configuration file outside of this file
+const EnhancedAddForm = withFormik({
+    mapPropsToValues: ({
+        address = '',
+        city = '',
+        state = '',
+        zip = '',
+        description = '',
+        canHaveChildren = false,
+        propertyType = '',
+        floors = 1,
+        beds = 1,
+        baths = 1,
+        amenities = '',
+        price = '',
+    }) => ({
+        address,
+        city,
+        state,
+        zip,
+        description,
+        canHaveChildren,
+        propertyType,
+        floors,
+        beds,
+        baths,
+        amenities,
+        price,
+    }),
+    validationSchema: Yup.object().shape({
+        // form shape goes here with validation
+        address: Yup.string().required(),
+        city: Yup.string().required(),
+        state: Yup.string()
+            .min(2)
+            .required(),
+        zip: Yup.string()
+            .required()
+            .min(5),
+        description: Yup.string().required(),
+        canHaveChildren: Yup.boolean().oneOf([true, false]),
+        propertyType: Yup.string().required(), // what kind of property types are there? commerical/residential
+        floors: Yup.string(),
+        beds: Yup.string(),
+        baths: Yup.string(),
+        amenities: Yup.string().required(),
+        price: Yup.string().required(),
+    }),
+    handleSubmit: async (values, formikBag) => {
+        try {
+            // dispatch an action, action should contain this line below
+            const response = await withAuth('/api/property/', 'post', values);
+        } catch (error) {}
+    },
+})(AddForm);
+
+export default EnhancedAddForm;

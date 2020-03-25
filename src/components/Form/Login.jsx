@@ -1,58 +1,72 @@
 import React, { useState, useEffect } from 'react';
-import { withFormik, Form, Field } from 'formik';
-import {Link} from 'react-router-dom';
+import { withFormik, Form } from 'formik';
+import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
-import axios from 'axios';
+import { connect } from 'react-redux'
+import { withAuth } from '../../util/withAuth';
+import { Input } from '../';
 
-
-function Login({ values, errors, touched, status}){
+function Login({ values, errors, touched, status }) {
     const [user, setUser] = useState([]);
 
-    useEffect(()=>{
-        status && setUser(user =>[...user, status]);
+    useEffect(() => {
+        status && setUser(user => [...user, status]);
     }, [status]);
 
-    return(
-        <div className="login-form">
+    return (
+        <div className="form">
+            <header>
+                <h3 className="form-header">Login</h3>
+            </header>
             <Form className="formCol">
-                <Field type= "text" name ="username" placeholder ="Username" />
-                {touched.username && errors.username && <p>{errors.username}</p>}
+                <Input type="text" name="username" placeholder="Username" />
+                {touched.username && errors.username && (
+                    <p>{errors.username}</p>
+                )}
 
-                <Field type= "password" name ="password" placeholder ="Password" />
-                  {touched.password && errors.password && <p>{errors.password}</p>}
-                  <p>Don't have an account? <Link to="/register">SignUp</Link></p>
+                <Input type="password" name="password" placeholder="Password" />
+                {touched.password && errors.password && (
+                    <p>{errors.password}</p>
+                )}
+                <p>
+                    Don't have an account? <Link to="/register">SignUp</Link>
+                </p>
                 <button type="submit"> LogIn </button>
-                <p>Forgot your password?</p>
             </Form>
         </div>
-    );  
+    );
 }
-    const FormikLoginForm =withFormik({
-        mapPropsToValues(props){
-            return{
-                username: props.username || "",
-                password: props.password || "" 
-            }
-        },
+const LoginForm = withFormik({
+    mapPropsToValues(props) {
+        return {
+            username: props.username || '',
+            password: props.password || '',
+        };
+    },
 
-        validationSchema: Yup.object().shape({
-            username: Yup.string()
-                .required("Please add username!"),
-            password: Yup.string()
-                .required("Please add password!")
-        }),
-        
-        handleSubmit(values, { resetForm, setStatus}){
-            axios.post("", values)
-            .then(response =>{
-                console.log("Login Response", response);
+    validationSchema: Yup.object().shape({
+        username: Yup.string().required('Please add username!'),
+        password: Yup.string().required('Please add password!'),
+    }),
+
+    handleSubmit(values, { resetForm, setStatus }) {
+        withAuth()
+            .post('', values)
+            .then(response => {
+                console.log('Login Response', response);
                 resetForm();
                 setStatus(response.data);
             })
-            .catch(error =>{
+            .catch(error => {
                 console.log(error);
-            })
-        }
+            });
+    },
+})(Login);
 
-    })(Login);
- export default FormikLoginForm;
+const mapStateToProps = state => {
+    return {
+      isFetching: state.isFetching,
+      error: state.error,
+    }
+  }
+export default connect(mapStateToProps, {})(LoginForm);

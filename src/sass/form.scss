@@ -1,4 +1,4 @@
-.add-form {
+.form {
     font-size: 1.25rem;
 
     &-header {
@@ -9,6 +9,12 @@
     button {
         background: lighten($color: $blue, $amount: 5);
         color: white;
+    }
+
+    &-update {
+        font-size: 1.1rem;
+        font-weight: 600;
+        padding: 7px 15px;
     }
 }
 

@@ -171,4 +171,11 @@ export default {
     },
 
     modal: {},
+    auth: {
+        isLoading: null,
+        status: null,
+        error: {
+            message: null,
+        },
+    },
 };

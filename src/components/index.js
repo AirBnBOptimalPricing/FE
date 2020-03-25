@@ -4,5 +4,14 @@ import DeleteListingButton from './Form/DeleteListingButton';
 import Login from './Form/Login';
 import Register from './Form/Register';
 import UpdateListing from './Form/UpdateListing';
+import PrivateRoute from './Route/PrivateRoute';
 
-export { App, AddListing, DeleteListingButton, Login, Register, UpdateListing };
+export {
+    App,
+    AddListing,
+    DeleteListingButton,
+    Login,
+    Register,
+    UpdateListing,
+    PrivateRoute,
+};

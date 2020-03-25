@@ -1,31 +1,31 @@
 import React from 'react';
-import { Form, Field } from 'formik';
-import { useForm } from '../../hooks';
+import { Form } from 'formik';
+import { useForm, useOptions } from '../../hooks';
 import { addConfiguration } from './configurations';
-
+import { Input } from '../';
 const AddListing = () => {
+    const [floors, bedsAndBaths] = useOptions([{ amount: 5 }, { amount: 7 }]);
+
     const form = () => (
         <Form>
-            <Field name="address" />
-            <Field name="city" />
-            <Field name="state" />
-            <Field name="zip" />
-            <Field name="description" />
-            <Field name="canHaveChildren" type="checkbox" />
-            <Field name="propertyType" />
-            <Field name="floors" as="select">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-            </Field>
-            <Field name="beds"></Field>
-            <Field name="bath"></Field>
-            <Field name="amenities"></Field>
-            <Field name="price"></Field>
+            <Input name="address" type="text" />
+            <Input name="city" type="text" />
+            <Input name="state" type="text" />
+            <Input name="zip" type="number" />
+            <Input name="description" type="text" />
+            <Input name="canHaveChildren" type="checkbox" />
+            <Input name="propertyType" type="text" />
+            <Input name="floors" as="select">
+                {floors}
+            </Input>
+            <Input name="beds" as="select">
+                {bedsAndBaths}
+            </Input>
+            <Input name="bath" as="select">
+                {bedsAndBaths}
+            </Input>
+            <Input name="amenities" />
+            <Input name="price" />
         </Form>
     );
     const EnhancedAdd = useForm(form, addConfiguration);

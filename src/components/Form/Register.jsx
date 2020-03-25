@@ -64,8 +64,8 @@ const Register = ({ values, errors, touched, status }) => {
                     <p>
                         Already have an account? <Link to="/login">LogIn</Link>
                     </p>
-                    <button type="submit"> SignUp </button>
                 </div>
+                <button type="submit"> SignUp </button>
             </Form>
         </div>
     );

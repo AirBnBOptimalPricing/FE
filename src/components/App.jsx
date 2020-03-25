@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { AddListing, PrivateRoute } from './';
+import { AddListing, PrivateRoute, UpdateListing } from './';
 
 function App() {
     return (
@@ -9,19 +9,20 @@ function App() {
                 <Route path="/login" render={() => <div>Login</div>} />
                 <Route path="/register" render={() => <div>Register</div>} />
                 {/* will have a separate router underneath of it */}
+                <Route path="/property" exact>
+                    <div>Properties</div>
+                </Route>
                 <PrivateRoute
                     path="/property/new"
                     exact
                     component={AddListing}
                 />
-                <Route
-                    path="/property"
-                    component={() => (
-                        <div>
-                            {/* will have a separate router inside of it */}
-                            Properties
-                        </div>
-                    )}
+                <Route path="/property/:id" exact>
+                    <div>Property</div>
+                </Route>
+                <PrivateRoute
+                    path="/property/:id/edit"
+                    component={UpdateListing}
                 />
             </Switch>
         </div>

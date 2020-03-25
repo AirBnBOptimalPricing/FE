@@ -3,7 +3,6 @@ import { Login, Register } from '.';
 
 function App() {
   return <div className="App">
-    
   </div>;
 }
 

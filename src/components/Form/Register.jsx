@@ -15,21 +15,21 @@ const Register = ({ values, errors, touched,  status }) => {
         <div className="signUp-form">  
             <Form className="div1" >
                    <div className="formCol">
-                   <Field type="text" name="username" placeholder="Username*" />
+                   <Field type="text" name="username" placeholder="Username" />
                    {touched.username && errors.username && <p className="errors"> {errors.username}</p>}
                    
-                    <Field type="password" name="password" placeholder="Password*" />
+                    <Field type="password" name="password" placeholder="Password" />
                     {touched.password && errors.password && <p className="errors">{errors.password}</p>}
                     
-                    <Field type="text" name="firstname" placeholder=" First Name*" />
+                    <Field type="text" name="firstname" placeholder=" First Name" />
                    {touched.firstname && errors.firstname && <p className="errors"> {errors.firstname}</p>}
                    </div>
                     
                    <div className="formCol">
-                   <Field type="text" name="lastname" placeholder="lastname*" />
+                   <Field type="text" name="lastname" placeholder="lastname" />
                    {touched.lastname && errors.lastname && <p className="errors"> {errors.lastname}</p>}
 
-                   <Field type="email" name="email" placeholder="Email*" />
+                   <Field type="email" name="email" placeholder="Email" />
                     {touched.email && errors.email && <p className="errors">{errors.email}</p>}
                     <p>Already have an account? <Link to="/login">LogIn</Link></p>
                 <button type="submit"> SignUp </button>

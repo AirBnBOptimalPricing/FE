@@ -1,0 +1,22 @@
+form {
+    width: 100vw;
+    display: flex;
+    flex-flow: column;
+}
+
+input,
+select {
+    width: 80%;
+    border-radius: 5px;
+}
+
+select,
+input[type='checkbox'] {
+    width: 10%;
+}
+
+input {
+    padding: 0 5px;
+    outline: none;
+    margin-bottom: 5px;
+}

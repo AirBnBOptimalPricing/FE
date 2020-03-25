@@ -1,4 +1,4 @@
-export default {
+export const initialState = {
     property: {
         list: {
             1: {
@@ -177,9 +177,9 @@ export default {
         error: {
             message: null,
         },
-    },
-    user: {
-        loggedInAs: null,
-        token: null,
+        user: {
+            loggedInAs: null,
+            token: null,
+        },
     },
 };

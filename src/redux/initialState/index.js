@@ -178,4 +178,8 @@ export default {
             message: null,
         },
     },
+    user: {
+        loggedInAs: null,
+        token: null,
+    },
 };

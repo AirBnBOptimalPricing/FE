@@ -8,9 +8,9 @@ const AddForm = ({ errors, touched, initialValues, values }) => {
     const [floors, bedsAndBaths] = useOptions([{ amount: 5 }, { amount: 7 }]);
 
     return (
-        <div className="add-form">
+        <div className="form">
             <header>
-                <h3 className="add-form-header">Add a property</h3>
+                <h3 className="form-header">Add a property</h3>
             </header>
             <Form>
                 <Input name="address" id="address" />

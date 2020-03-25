@@ -168,6 +168,7 @@ export const initialState = {
             amenities: null,
             price: null,
         },
+        isPending: null,
     },
 
     modal: {},

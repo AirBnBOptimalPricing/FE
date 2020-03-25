@@ -19,8 +19,8 @@ function Login({ values, errors, touched, status}){
                 {touched.username && errors.username && <p>{errors.username}</p>}
 
                 <Field type= "password" name ="password" placeholder ="Password" />
-                {touched.password && errors.password && <p>{errors.password}</p>}
-                <p>Don't have an account? <Link to="/signup">SignUp</Link></p>
+                  {touched.password && errors.password && <p>{errors.password}</p>}
+                  <p>Don't have an account? <Link to="/register">SignUp</Link></p>
                 <button type="submit"> LogIn </button>
                 <p>Forgot your password?</p>
             </Form>

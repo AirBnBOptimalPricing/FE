@@ -1,9 +1,9 @@
 import React from 'react';
-import { Login } from '.';
+import { Login, Register } from '.';
 
 function App() {
   return <div className="App">
-     <Login/>
+    
   </div>;
 }
 

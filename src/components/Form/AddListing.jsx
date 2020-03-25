@@ -1,5 +1,4 @@
 import React from 'react';
-import * as Yup from 'yup';
 import { Form, Field } from 'formik';
 import { useForm } from '../../hooks';
 import { addConfiguration } from './configurations';

@@ -1,3 +1,5 @@
+import * as Yup from 'yup';
+
 export const addConfiguration = {
     mapPropsToValue({
         address = '',
@@ -18,6 +20,7 @@ export const addConfiguration = {
             address,
             city,
             state,
+            zip,
             description,
             canHaveChildren,
             propertyType,

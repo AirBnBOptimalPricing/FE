@@ -1,0 +1,9 @@
+.card-info{
+    display:flex;
+    flex-direction: column;
+    justify-content:left;
+    .edit-div{
+        display:flex;
+        justify-content: space-between;
+    }
+}

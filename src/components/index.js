@@ -6,6 +6,7 @@ import Register from './Form/Register';
 import UpdateListing from './Form/UpdateListing';
 import PrivateRoute from './Route/PrivateRoute';
 import Input from './Form/Input';
+import Listing from './Listing/Listing'
 
 export {
     App,
@@ -16,4 +17,5 @@ export {
     Register,
     UpdateListing,
     PrivateRoute,
+    Listing,
 };

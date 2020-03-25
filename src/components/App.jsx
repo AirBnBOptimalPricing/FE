@@ -1,14 +1,14 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { AddListing, PrivateRoute, UpdateListing, Login, Register } from './';
+import { AddListing, PrivateRoute, UpdateListing, Login, Register, Listing } from './';
 
 function App() {
     return (
         <div className="App">
             <Switch>
-                <h1>welcome to our app</h1>
-                <Route path="/login" component={Login} />
-                <Route path="/register" component={Register} />
+            <Route exact path="/" component={Listing} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/register" component={Register} />
                 {/* will have a separate router underneath of it */}
                 <Route path="/property" exact>
                     <div>Properties</div>

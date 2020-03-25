@@ -5,11 +5,13 @@ import Login from './Form/Login';
 import Register from './Form/Register';
 import UpdateListing from './Form/UpdateListing';
 import PrivateRoute from './Route/PrivateRoute';
+import Input from './Form/Input';
 
 export {
     App,
     AddListing,
     DeleteListingButton,
+    Input,
     Login,
     Register,
     UpdateListing,

@@ -3,6 +3,7 @@ import { Form, withFormik } from 'formik';
 import * as Yup from 'yup';
 import { useOptions } from '../../hooks';
 import { Input } from '../';
+import { withAuth } from '../../util';
 
 const AddForm = ({ errors, touched, initialValues, values }) => {
     const [floors, bedsAndBaths] = useOptions([{ amount: 5 }, { amount: 7 }]);
@@ -96,7 +97,12 @@ const EnhancedAddForm = withFormik({
         amenities: Yup.string().required(),
         price: Yup.string().required(),
     }),
-    handleSubmit: (values, formikBag) => {},
+    handleSubmit: async (values, formikBag) => {
+        try {
+            // dispatch an action, action should contain this line below
+            const response = await withAuth('/api/property/', 'post', values);
+        } catch (error) {}
+    },
 })(AddForm);
 
 export default EnhancedAddForm;

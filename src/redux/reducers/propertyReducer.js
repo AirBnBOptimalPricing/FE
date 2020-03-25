@@ -2,9 +2,18 @@ import {
     GET_PROPERTY_FAILURE,
     GET_PROPERTY_START,
     GET_PROPERTY_SUCCESS,
+    CREATE_PROPERTY_FAILURE,
+    CREATE_PROPERTY_SUCCESS,
+    CREATE_PROPERTY_START,
+    UPDATE_PROPERTY_FAILURE,
+    UPDATE_PROPERTY_START,
+    UPDATE_PROPERTY_SUCCESS,
+    DELETE_PROPERTY_FAILURE,
+    DELETE_PROPERTY_START,
+    DELETE_PROPERTY_SUCCESS,
 } from '../actions';
 
-import { mapObject } from '../../util';
+import { mapObject, insertObjectToMap } from '../../util';
 
 import { initialState } from '../initialState';
 
@@ -16,20 +25,20 @@ export const property = (state = { ...initialState.property }, action) => {
                 status: {
                     ...state.status,
                     isLoading: true,
-                },
-            };
-        case GET_PROPERTY_SUCCESS:
-            const propertyList = mapObject(action.payload);
-            return {
-                ...state,
-                list: { ...propertyList },
-                status: {
-                    ...state.status,
-                    isLoading: false,
                     errors: {
                         ...state.errors,
                         message: '',
                     },
+                },
+            };
+        case GET_PROPERTY_SUCCESS:
+            const fetchedMappedPropertyList = mapObject(action.payload);
+            return {
+                ...state,
+                list: { ...fetchedMappedPropertyList },
+                status: {
+                    ...state.status,
+                    isLoading: false,
                 },
             };
         case GET_PROPERTY_FAILURE:
@@ -38,6 +47,44 @@ export const property = (state = { ...initialState.property }, action) => {
                 list: {},
                 status: {
                     ...state,
+                    isLoading: false,
+                    errors: {
+                        ...state.errors,
+                        message: action.payload.message,
+                    },
+                },
+            };
+        case CREATE_PROPERTY_START:
+            return {
+                ...state,
+                status: {
+                    ...state.status,
+                    isLoading: true,
+                    errors: {
+                        ...state.errors,
+                        message: '',
+                    },
+                },
+            };
+        case CREATE_PROPERTY_SUCCESS:
+            // add to list by reconverting list back to array and subjecting to mapObject
+            const newlyCreatedPropertyList = insertObjectToMap(
+                action.payload,
+                state.list,
+            );
+            return {
+                ...state,
+                list: { ...newlyCreatedPropertyList },
+                status: {
+                    isLoading: false,
+                },
+            };
+        case CREATE_PROPERTY_FAILURE:
+            return {
+                ...state,
+                status: {
+                    ...state.status,
+                    isLoading: false,
                     errors: {
                         ...state.errors,
                         message: action.payload.message,
@@ -45,6 +92,45 @@ export const property = (state = { ...initialState.property }, action) => {
                 },
             };
 
+        case UPDATE_PROPERTY_START:
+            return {
+                ...state,
+                status: {
+                    ...state.status,
+                    isLoading: true,
+                    errors: {
+                        ...state.errors,
+                        message: '',
+                    },
+                },
+            };
+        case UPDATE_PROPERTY_SUCCESS:
+            // payload is updated object with id
+            const { id } = action.payload;
+            const property = { ...state.list[id], ...action.payload };
+            return {
+                ...state,
+                list: {
+                    ...state.list,
+                    [id]: { ...property },
+                },
+                status: {
+                    ...state.status,
+                    isLoading: false,
+                },
+            };
+        case UPDATE_PROPERTY_FAILURE:
+            return {
+                ...state,
+                status: {
+                    ...state.status,
+                    isLoading: true,
+                    errors: {
+                        ...state.errors,
+                        message: action.payload.message,
+                    },
+                },
+            };
         default:
             return { ...state };
     }

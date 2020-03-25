@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { withFormik, Form } from 'formik';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
-import axios from 'axios';
+import { withAuth } from '../../util/withAuth';
+import { connect } from 'react-redux'
 import { Input } from '../';
 
 const Register = ({ values, errors, touched, status }) => {
@@ -70,7 +71,7 @@ const Register = ({ values, errors, touched, status }) => {
         </div>
     );
 };
-const FormikSignInForm = withFormik({
+const RegistrationForm = withFormik({
     mapPropsToValues(props) {
         return {
             username: props.username || '',
@@ -99,18 +100,23 @@ const FormikSignInForm = withFormik({
         lastname: Yup.string().required('Please add lastname!'),
     }),
 
-    handleSubmit(values, { resetForm, setStatus }) {
+    handleSubmit(values) {
         console.log(values);
-        axios()
+        withAuth()
             .post('/auth/register', values)
             .then(res => {
                 console.log(res);
                 localStorage.setItem('token', res.data.token);
-                resetForm();
-                setStatus(res.data);
             })
             .catch(err => console.error(err));
     },
 })(Register);
 
-export default FormikSignInForm;
+const mapStateToProps = state => {
+    return {
+        isLoading: state.auth.isLoading,
+        error: state.auth.error,
+    };
+};
+
+export default connect(mapStateToProps, {})(RegistrationForm);

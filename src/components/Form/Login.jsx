@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { withFormik, Form } from 'formik';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
-import axios from 'axios';
+import { connect } from 'react-redux'
+import { withAuth } from '../../util/withAuth';
 import { Input } from '../';
 
 function Login({ values, errors, touched, status }) {
@@ -35,7 +36,7 @@ function Login({ values, errors, touched, status }) {
         </div>
     );
 }
-const FormikLoginForm = withFormik({
+const LoginForm = withFormik({
     mapPropsToValues(props) {
         return {
             username: props.username || '',
@@ -49,7 +50,7 @@ const FormikLoginForm = withFormik({
     }),
 
     handleSubmit(values, { resetForm, setStatus }) {
-        axios
+        withAuth()
             .post('', values)
             .then(response => {
                 console.log('Login Response', response);
@@ -61,4 +62,11 @@ const FormikLoginForm = withFormik({
             });
     },
 })(Login);
-export default FormikLoginForm;
+
+const mapStateToProps = state => {
+    return {
+        isLoading: state.auth.isLoading,
+      error: state.auth.error,
+    }
+  }
+export default connect(mapStateToProps, {})(LoginForm);

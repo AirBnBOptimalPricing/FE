@@ -10,6 +10,8 @@ import React from 'react';
 // } from 'reactstrap';
 import { useHistory } from 'react-router-dom';
 // import ListingPage from './ListingPage';
+import { connect } from 'react-redux';
+import { PropertyCard } from '../';
 
 const Listing = listing => {
     const history = useHistory();
@@ -82,4 +84,6 @@ const Listing = listing => {
     );
 };
 
-export default Listing;
+const mapStateToProps = ({}) => ({});
+
+export default connect()(Listing);

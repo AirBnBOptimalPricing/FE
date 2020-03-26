@@ -54,11 +54,11 @@ const LoginForm = withFormik({
         },
     ) => {
         login(values).then(data => {
-            console.log(data);
             resetForm({
                 password: '',
                 email: '',
             });
+            push('/property');
         });
     },
 })(Login);

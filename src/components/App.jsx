@@ -6,7 +6,7 @@ function App() {
     return (
         <div className="App">
             <Switch>
-            <Route exact path="/" component={Listing} />
+            <Route exact path="/listing" component={Listing} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/register" component={Register} />
                 {/* will have a separate router underneath of it */}

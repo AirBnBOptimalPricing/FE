@@ -1,4 +1,9 @@
-import { AUTH_START, AUTH_SUCCESS, AUTH_FAILURE } from '../actions';
+import {
+    AUTH_START,
+    AUTH_SUCCESS,
+    AUTH_FAILURE,
+    SET_LOGGED_IN_USER,
+} from '../actions';
 import { decodeToken } from '../../util';
 
 const initialState = {
@@ -27,10 +32,11 @@ export const auth = (state = initialState, action) => {
             };
 
         case AUTH_SUCCESS:
-            const { id } = action.payload.token
-                ? decodeToken(action.payload.token)
-                : null;
-
+            let {
+                payload: { token },
+            } = action;
+            const { id } = token ? decodeToken(token) : null;
+            localStorage.setItem('token', token);
             return {
                 ...state,
                 isLoading: false,
@@ -50,6 +56,20 @@ export const auth = (state = initialState, action) => {
                 error: {
                     ...state.error,
                     message: action.payload.message,
+                },
+            };
+        case SET_LOGGED_IN_USER:
+            const localToken = localStorage.getItem('token');
+            const user = localToken ? decodeToken(localToken) : null;
+            console.log(localToken, user);
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    loggedInAs: {
+                        ...state.user.loggedInAs,
+                        id: user.id,
+                    },
                 },
             };
 

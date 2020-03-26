@@ -3,9 +3,10 @@ import { Form, withFormik } from 'formik';
 import * as Yup from 'yup';
 import { useOptions } from '../../hooks';
 import { Input } from '../';
-import { withAuth } from '../../util';
+import { connect } from 'react-redux';
+import { addProperty } from '../../redux/actionCreators/';
 
-const AddForm = ({ errors, touched, initialValues, values }) => {
+const AddForm = ({ errors, touched }) => {
     const [floors, bedsAndBaths] = useOptions([{ amount: 5 }, { amount: 7 }]);
 
     return (
@@ -97,12 +98,36 @@ const EnhancedAddForm = withFormik({
         amenities: Yup.string().required(),
         price: Yup.string().required(),
     }),
-    handleSubmit: async (values, formikBag) => {
-        try {
-            // dispatch an action, action should contain this line below
-            const response = await withAuth('/api/property/', 'post', values);
-        } catch (error) {}
+    handleSubmit: (
+        values,
+        { props: { addProperty }, history: { push }, resetForm },
+    ) => {
+        addProperty({ ...values }).then(() => {
+            // on success
+            resetForm({
+                address: '',
+                city: '',
+                state: '',
+                zip: '',
+                description: '',
+                canHaveChildren: false,
+                propertyType: '',
+                floors: 1,
+                beds: 1,
+                baths: 1,
+                amenities: '',
+                price: '',
+            });
+        });
     },
 })(AddForm);
 
-export default EnhancedAddForm;
+const mapStateToProps = ({
+    property: {
+        status: { isLoading },
+    },
+}) => {
+    return { isLoading };
+};
+
+export default connect(mapStateToProps, { addProperty })(EnhancedAddForm);

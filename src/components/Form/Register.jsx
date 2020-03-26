@@ -42,6 +42,7 @@ const Register = ({ values, errors, touched, status }) => {
                         type="text"
                         name="firstname"
                         placeholder=" First Name*"
+                        altText="First Name"
                     />
                     {touched.firstname && errors.firstname && (
                         <p className="errors"> {errors.firstname}</p>
@@ -53,6 +54,7 @@ const Register = ({ values, errors, touched, status }) => {
                         type="text"
                         name="lastname"
                         placeholder="lastname*"
+                        altText="Last Name"
                     />
                     {touched.lastname && errors.lastname && (
                         <p className="errors"> {errors.lastname}</p>

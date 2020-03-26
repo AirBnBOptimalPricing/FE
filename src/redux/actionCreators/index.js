@@ -1,20 +1,4 @@
-import {
-    registerStart,
-    registerFailure,
-    registerSuccess,
-    loginStart,
-    loginSuccess,
-    loginFailure,
-} from './auth';
+import { authStart, authFailure, authSuccess } from './auth';
 import { login, register } from './asyncAuth';
 
-export {
-    registerStart,
-    registerFailure,
-    registerSuccess,
-    loginStart,
-    loginSuccess,
-    loginFailure,
-    login,
-    register,
-};
+export { authStart, authFailure, authSuccess, login, register };

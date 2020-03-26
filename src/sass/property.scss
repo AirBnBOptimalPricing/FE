@@ -1,11 +1,15 @@
 .property {
     &.card {
+        &:first-child {
+            margin-top: 15px;
+        }
         padding: 4%;
         width: 90%;
         margin: 0 auto;
         display: flex;
         justify-content: flex-start;
         flex-flow: row;
+        margin-bottom: 15px;
         img {
             width: 150px;
             height: 150px;
@@ -35,10 +39,10 @@
     }
 
     &-controls {
+        margin-top: 10px;
         display: flex;
         flex-flow: row;
         justify-content: space-around;
-        height: 72px;
         align-items: flex-end;
         & > div {
             width: 40%;

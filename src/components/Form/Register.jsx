@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { withFormik, Form } from 'formik';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
-import { withAuth } from '../../util/withAuth';
 import { connect } from 'react-redux';
 import { Input } from '../';
+import { register } from '../../redux/actionCreators';
 
 const Register = ({ values, errors, touched, status }) => {
     const [users, setUsers] = useState([]);
@@ -101,15 +101,9 @@ const RegistrationForm = withFormik({
         lastname: Yup.string().required('Please add lastname!'),
     }),
 
-    handleSubmit(values) {
+    handleSubmit(values, { props: { register } }) {
         console.log(values);
-        withAuth()
-            .post('/auth/register', values)
-            .then(res => {
-                console.log(res);
-                localStorage.setItem('token', res.data.token);
-            })
-            .catch(err => console.error(err));
+        register(values);
     },
 })(Register);
 
@@ -120,4 +114,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps, {})(RegistrationForm);
+export default connect(mapStateToProps, { register })(RegistrationForm);

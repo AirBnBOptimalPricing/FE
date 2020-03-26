@@ -1,0 +1,25 @@
+.card{
+    margin: 0 10%;
+    .card-listing{
+        display:flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .card-image{
+            margin: 2% 12%;
+        }
+        .card-info{
+            display:flex;
+            flex-direction: column;
+            justify-content:left;
+            margin:0 7%;
+            .edit-div{
+                display:flex;
+                justify-content: space-between;
+            }
+        }
+    }
+};
+
+.card-columns{
+    margin: 2% 7%;
+};

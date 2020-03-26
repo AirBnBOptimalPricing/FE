@@ -3,7 +3,7 @@ import { withFormik, Form } from 'formik';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { withAuth } from '../../util/withAuth';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { Input } from '../';
 
 const Register = ({ values, errors, touched, status }) => {
@@ -42,6 +42,7 @@ const Register = ({ values, errors, touched, status }) => {
                         type="text"
                         name="firstname"
                         placeholder=" First Name*"
+                        altText="First Name"
                     />
                     {touched.firstname && errors.firstname && (
                         <p className="errors"> {errors.firstname}</p>
@@ -53,6 +54,7 @@ const Register = ({ values, errors, touched, status }) => {
                         type="text"
                         name="lastname"
                         placeholder="lastname*"
+                        altText="Last Name"
                     />
                     {touched.lastname && errors.lastname && (
                         <p className="errors"> {errors.lastname}</p>
@@ -89,7 +91,6 @@ const RegistrationForm = withFormik({
             .required('Please add user name!'),
         password: Yup.string()
             .min(6, 'Password must be 6 characters minimum')
-            .max(10, 'Too Long!')
             .required('Please add password!'),
         firstname: Yup.string()
             .min(2, 'Name must be 2 characters minimum')

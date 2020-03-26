@@ -8,7 +8,7 @@ export const withAuth = (url, method, data) => {
             headers: {
                 Authorization: token,
             },
-            baseURL: '',
+            baseURL: 'https://airbnb-labmda.herokuapp.com',
         })
         [method](url, data);
 };

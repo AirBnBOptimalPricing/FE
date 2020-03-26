@@ -168,6 +168,12 @@ export const initialState = {
             amenities: null,
             price: null,
         },
+        status: {
+            isLoading: null,
+            errors: {
+                message: null,
+            },
+        },
     },
 
     modal: {},

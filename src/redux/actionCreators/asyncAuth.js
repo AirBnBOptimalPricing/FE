@@ -1,33 +1,26 @@
-import {
-    registerStart,
-    registerFailure,
-    registerSuccess,
-    loginStart,
-    loginSuccess,
-    loginFailure,
-} from './';
+import { authStart, authSuccess, authFailure } from './';
 import { withAuth } from '../../util';
 
 export const login = credentials => async dispatch => {
-    loginStart();
+    dispatch(authStart());
     try {
         const response = await withAuth('/auth/login/', 'post', credentials);
-        console.log(response);
-        loginSuccess(response);
+        const payload = { token: response.data.token };
+        dispatch(authSuccess(payload));
     } catch (error) {
         console.log(error);
-        loginFailure(error);
+        dispatch(authFailure(error));
     }
 };
 
 export const register = credentials => async dispatch => {
-    registerStart();
+    dispatch(authStart());
     try {
-        console.log(response);
         const response = await withAuth('/auth/register/', 'post', credentials);
-        registerSuccess(response);
+        const payload = { token: '' };
+        dispatch(authSuccess(payload));
     } catch (error) {
         console.log(error);
-        registerFailure(error);
+        dispatch(authFailure(error));
     }
 };

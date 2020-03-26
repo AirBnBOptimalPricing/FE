@@ -61,7 +61,6 @@ export const auth = (state = initialState, action) => {
         case SET_LOGGED_IN_USER:
             const localToken = localStorage.getItem('token');
             const user = localToken ? decodeToken(localToken) : null;
-            console.log(localToken, user);
             return {
                 ...state,
                 user: {

@@ -4,6 +4,7 @@ import { withAuth } from './withAuth';
 import { mapObject } from './mapObject';
 import { undoMapObject } from './undoMapObject';
 import { insertObjectToMap } from './insertObjectToMap';
+import { removeObjectFromMap } from './removeObjectFromMap';
 
 export {
     capitalize,
@@ -12,4 +13,5 @@ export {
     undoMapObject,
     mapObject,
     insertObjectToMap,
+    removeObjectFromMap,
 };

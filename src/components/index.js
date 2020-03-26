@@ -6,8 +6,9 @@ import Register from './Form/Register';
 import UpdateListing from './Form/UpdateListing';
 import PrivateRoute from './Route/PrivateRoute';
 import Input from './Form/Input';
-import Listing from './Listing/Listing'
-import Navigation from './Form/Navigation'
+import Listing from './Listing/Listing';
+import Navigation from './Form/Navigation';
+import PropertyCard from './Listing/PropertyCard';
 
 export {
     App,
@@ -20,4 +21,5 @@ export {
     PrivateRoute,
     Listing,
     Navigation,
+    PropertyCard,
 };

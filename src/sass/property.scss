@@ -1,0 +1,62 @@
+.property {
+    &.card {
+        padding: 4%;
+        width: 90%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: flex-start;
+        flex-flow: row;
+        img {
+            width: 150px;
+            height: 150px;
+            position: relative;
+            left: -25px;
+        }
+        &,
+        img {
+            border-radius: 10px;
+            box-shadow: 1px 1px 5px rgb(75, 75, 75);
+        }
+    }
+
+    &-info > header > h4,
+    div,
+    section {
+        font-size: 1.35rem;
+        font-weight: 700;
+    }
+
+    section,
+    div {
+        font-weight: 400;
+    }
+    p {
+        margin: 0;
+    }
+
+    &-controls {
+        display: flex;
+        flex-flow: row;
+        justify-content: space-around;
+        height: 72px;
+        align-items: flex-end;
+        & > div {
+            width: 40%;
+            box-shadow: 1.5px 1.5px 0 black;
+            border-radius: 5px;
+            text-align: center;
+            background: lighten($color: $blue, $amount: 10);
+            color: white;
+            font-weight: 800;
+            font-size: 1.5rem;
+
+            &:active {
+                background: darken($color: $blue, $amount: 15);
+                box-shadow: 1px 1px 0 black inset;
+            }
+        }
+        .delete {
+            background: rgb(200, 0, 0);
+        }
+    }
+}

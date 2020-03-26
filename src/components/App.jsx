@@ -35,8 +35,10 @@ function App({ setLoggedInUser }) {
                 />
                 <Route
                     path="/property/:id"
-                    component={PropertyCard}
-                    exact></Route>
+                    // component={PropertyCard}
+                    exact>
+                    <div>Property</div>
+                </Route>
                 <PrivateRoute
                     path="/property/:id/edit"
                     component={UpdateListing}

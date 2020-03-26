@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { setLoggedInUser } from '../redux/actionCreators';
 import {
     AddListing,
     PrivateRoute,
@@ -8,14 +10,18 @@ import {
     Register,
     Listing,
     Navigation,
+    PropertyCard,
 } from './';
 
-function App() {
+function App({ setLoggedInUser }) {
+    useEffect(() => {
+        setLoggedInUser();
+    }, []);
     return (
         <div className="App">
             <Navigation />
             <Switch>
-                <Route path="/property" component={Listing} />
+                <Route path="/property" exact component={Listing} />
                 <Route path="/login" component={Login} />
                 <Route path="/register" component={Register} />
                 {/* will have a separate router underneath of it */}
@@ -27,9 +33,10 @@ function App() {
                     exact
                     component={AddListing}
                 />
-                <Route path="/property/:id" exact>
-                    <div>Property</div>
-                </Route>
+                <Route
+                    path="/property/:id"
+                    component={PropertyCard}
+                    exact></Route>
                 <PrivateRoute
                     path="/property/:id/edit"
                     component={UpdateListing}
@@ -40,4 +47,4 @@ function App() {
     );
 }
 
-export default App;
+export default connect(null, { setLoggedInUser })(App);

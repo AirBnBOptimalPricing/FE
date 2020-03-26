@@ -1,15 +1,23 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-import { AddListing, PrivateRoute, UpdateListing, Login, Register, Listing, Navigation } from './';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import {
+    AddListing,
+    PrivateRoute,
+    UpdateListing,
+    Login,
+    Register,
+    Listing,
+    Navigation,
+} from './';
 
 function App() {
     return (
         <div className="App">
-            <Navigation/>
+            <Navigation />
             <Switch>
-            <Route exact path="/" component={Listing} />
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/register" component={Register} />
+                <Route path="/property" component={Listing} />
+                <Route path="/login" component={Login} />
+                <Route path="/register" component={Register} />
                 {/* will have a separate router underneath of it */}
                 <Route path="/property" exact>
                     <div>Properties</div>
@@ -26,6 +34,7 @@ function App() {
                     path="/property/:id/edit"
                     component={UpdateListing}
                 />
+                <Route render={() => <Redirect to="/login" />} />
             </Switch>
         </div>
     );

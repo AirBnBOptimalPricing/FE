@@ -109,17 +109,16 @@ const RegistrationForm = withFormik({
             resetForm,
         },
     ) {
-        register(values).then(
-            () =>
-                resetForm({
-                    username: '',
-                    password: '',
-                    firstName: '',
-                    lastName: '',
-                    email: '',
-                }),
-            push('/login'),
-        );
+        register(values).then(({ message }) => {
+            resetForm({
+                username: '',
+                password: '',
+                firstName: '',
+                lastName: '',
+                email: '',
+            });
+            push('/login');
+        });
     },
 })(Register);
 

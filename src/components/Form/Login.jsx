@@ -29,10 +29,10 @@ function Login({ errors, touched }) {
     );
 }
 const LoginForm = withFormik({
-    mapPropsToValues(props) {
+    mapPropsToValues({ email = '', password = '' }) {
         return {
-            email: props.email || '',
-            password: props.password || '',
+            email,
+            password,
         };
     },
 
@@ -43,8 +43,8 @@ const LoginForm = withFormik({
         password: Yup.string().required('Please add password!'),
     }),
 
-    handleSubmit(
-        { values },
+    handleSubmit: (
+        values,
         {
             props: {
                 login,
@@ -52,24 +52,21 @@ const LoginForm = withFormik({
             },
             resetForm,
         },
-    ) {
-        login(values).then(({ message }) => {
+    ) => {
+        login(values).then(data => {
+            console.log(data);
             resetForm({
-                username: '',
                 password: '',
-                firstName: '',
-                lastName: '',
                 email: '',
             });
-            push('/property');
         });
     },
 })(Login);
 
-const mapStateToProps = state => {
+const mapStateToProps = ({ auth: { isLoading, error } }) => {
     return {
-        isLoading: state.auth.isLoading,
-        error: state.auth.error,
+        isLoading,
+        error,
     };
 };
 export default connect(mapStateToProps, { login })(LoginForm);

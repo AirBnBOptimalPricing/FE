@@ -69,3 +69,10 @@ h3 {
 div {
     font-size: 2rem;
 }
+
+a {
+    text-decoration: none;
+    &:hover {
+        text-decoration: none;
+    }
+}

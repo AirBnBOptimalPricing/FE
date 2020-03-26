@@ -40,24 +40,24 @@ const Register = ({ values, errors, touched, status }) => {
 
                     <Input
                         type="text"
-                        name="firstname"
+                        name="firstName"
                         placeholder=" First Name*"
                         altText="First Name"
                     />
-                    {touched.firstname && errors.firstname && (
-                        <p className="errors"> {errors.firstname}</p>
+                    {touched.firstName && errors.firstName && (
+                        <p className="errors"> {errors.firstName}</p>
                     )}
                 </div>
 
                 <div className="formCol">
                     <Input
                         type="text"
-                        name="lastname"
-                        placeholder="lastname*"
+                        name="lastName"
+                        placeholder="lastName*"
                         altText="Last Name"
                     />
-                    {touched.lastname && errors.lastname && (
-                        <p className="errors"> {errors.lastname}</p>
+                    {touched.lastName && errors.lastName && (
+                        <p className="errors"> {errors.lastName}</p>
                     )}
 
                     <Input type="email" name="email" placeholder="Email*" />
@@ -78,8 +78,8 @@ const RegistrationForm = withFormik({
         return {
             username: props.username || '',
             password: props.password || '',
-            firstname: props.firstname || '',
-            lastname: props.lastname || '',
+            firstName: props.firstName || '',
+            lastName: props.lastName || '',
             email: props.email || '',
         };
     },
@@ -92,18 +92,34 @@ const RegistrationForm = withFormik({
         password: Yup.string()
             .min(6, 'Password must be 6 characters minimum')
             .required('Please add password!'),
-        firstname: Yup.string()
-            .min(2, 'Name must be 2 characters minimum')
-            .max(15, 'Name is too Long!'),
+        firstName: Yup.string().min(2, 'Name must be 2 characters minimum'),
         email: Yup.string()
             .email('Email not valid')
             .required('Please add email!'),
-        lastname: Yup.string().required('Please add lastname!'),
+        lastName: Yup.string().required('Please add lastName!'),
     }),
 
-    handleSubmit(values, { props: { register } }) {
-        console.log(values);
-        register(values);
+    handleSubmit(
+        { username, ...values },
+        {
+            props: {
+                register,
+                history: { push },
+            },
+            resetForm,
+        },
+    ) {
+        register(values).then(
+            () =>
+                resetForm({
+                    username: '',
+                    password: '',
+                    firstName: '',
+                    lastName: '',
+                    email: '',
+                }),
+            push('/login'),
+        );
     },
 })(Register);
 

@@ -3,8 +3,8 @@ import { withFormik, Form } from 'formik';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { connect } from 'react-redux';
-import { withAuth } from '../../util/withAuth';
 import { Input } from '../';
+import { login } from '../../redux/actionCreators';
 
 function Login({ errors, touched }) {
     return (
@@ -43,17 +43,26 @@ const LoginForm = withFormik({
         password: Yup.string().required('Please add password!'),
     }),
 
-    handleSubmit(values, { resetForm, setStatus }) {
-        withAuth()
-            .post('', values)
-            .then(response => {
-                console.log('Login Response', response);
-                resetForm();
-                setStatus(response.data);
-            })
-            .catch(error => {
-                console.log(error);
+    handleSubmit(
+        { values },
+        {
+            props: {
+                login,
+                history: { push },
+            },
+            resetForm,
+        },
+    ) {
+        login(values).then(({ message }) => {
+            resetForm({
+                username: '',
+                password: '',
+                firstName: '',
+                lastName: '',
+                email: '',
             });
+            push('/property');
+        });
     },
 })(Login);
 
@@ -63,4 +72,4 @@ const mapStateToProps = state => {
         error: state.auth.error,
     };
 };
-export default connect(mapStateToProps, {})(LoginForm);
+export default connect(mapStateToProps, { login })(LoginForm);

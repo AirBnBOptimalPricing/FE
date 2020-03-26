@@ -1,28 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { withFormik, Form } from 'formik';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
-import { connect } from 'react-redux'
-import { withAuth } from '../../util/withAuth';
+import { connect } from 'react-redux';
 import { Input } from '../';
+import { login } from '../../redux/actionCreators';
 
-function Login({ values, errors, touched, status }) {
-    const [user, setUser] = useState([]);
-
-    useEffect(() => {
-        status && setUser(user => [...user, status]);
-    }, [status]);
-
+function Login({ errors, touched }) {
     return (
         <div className="form">
             <header>
                 <h3 className="form-header">Login</h3>
             </header>
             <Form className="formCol">
-                <Input type="text" name="username" placeholder="Username" />
-                {touched.username && errors.username && (
-                    <p>{errors.username}</p>
-                )}
+                <Input type="text" name="email" placeholder="Email" />
+                {touched.email && errors.email && <p>{errors.email}</p>}
 
                 <Input type="password" name="password" placeholder="Password" />
                 {touched.password && errors.password && (
@@ -39,34 +31,45 @@ function Login({ values, errors, touched, status }) {
 const LoginForm = withFormik({
     mapPropsToValues(props) {
         return {
-            username: props.username || '',
+            email: props.email || '',
             password: props.password || '',
         };
     },
 
     validationSchema: Yup.object().shape({
-        username: Yup.string().required('Please add username!'),
+        email: Yup.string()
+            .email('Please enter a valid email')
+            .required('Please add email!'),
         password: Yup.string().required('Please add password!'),
     }),
 
-    handleSubmit(values, { resetForm, setStatus }) {
-        withAuth()
-            .post('', values)
-            .then(response => {
-                console.log('Login Response', response);
-                resetForm();
-                setStatus(response.data);
-            })
-            .catch(error => {
-                console.log(error);
+    handleSubmit(
+        { values },
+        {
+            props: {
+                login,
+                history: { push },
+            },
+            resetForm,
+        },
+    ) {
+        login(values).then(({ message }) => {
+            resetForm({
+                username: '',
+                password: '',
+                firstName: '',
+                lastName: '',
+                email: '',
             });
+            push('/property');
+        });
     },
 })(Login);
 
 const mapStateToProps = state => {
     return {
         isLoading: state.auth.isLoading,
-      error: state.auth.error,
-    }
-  }
-export default connect(mapStateToProps, {})(LoginForm);
+        error: state.auth.error,
+    };
+};
+export default connect(mapStateToProps, { login })(LoginForm);

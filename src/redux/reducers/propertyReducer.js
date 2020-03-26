@@ -13,7 +13,7 @@ import {
     DELETE_PROPERTY_SUCCESS,
 } from '../actions';
 
-import { mapObject, insertObjectToMap } from '../../util';
+import { mapObject, insertObjectToMap, removeObjectFromMap } from '../../util';
 
 import { initialState } from '../initialState';
 
@@ -106,7 +106,7 @@ export const property = (state = { ...initialState.property }, action) => {
             };
         case UPDATE_PROPERTY_SUCCESS:
             // payload is updated object with id
-            const { id } = action.payload;
+            let { id } = action.payload;
             const property = { ...state.list[id], ...action.payload };
             return {
                 ...state,
@@ -120,6 +120,43 @@ export const property = (state = { ...initialState.property }, action) => {
                 },
             };
         case UPDATE_PROPERTY_FAILURE:
+            return {
+                ...state,
+                status: {
+                    ...state.status,
+                    isLoading: true,
+                    errors: {
+                        ...state.errors,
+                        message: action.payload.message,
+                    },
+                },
+            };
+
+        case DELETE_PROPERTY_START:
+            return {
+                ...state,
+                status: {
+                    ...state.status,
+                    isLoading: true,
+                    errors: {
+                        ...state.errors,
+                        message: '',
+                    },
+                },
+            };
+        case DELETE_PROPERTY_SUCCESS:
+            // this is where we remove said object, we are given an id
+            const { id: propertyIdToDelete } = action.payload;
+            const listWithoutId = removeObjectFromMap(
+                propertyIdToDelete,
+                state.list,
+            );
+            return {
+                ...state,
+                list: { ...listWithoutId },
+                status: { ...state.status, isLoading: false },
+            };
+        case DELETE_PROPERTY_FAILURE:
             return {
                 ...state,
                 status: {

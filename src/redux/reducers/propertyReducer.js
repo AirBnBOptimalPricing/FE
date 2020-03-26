@@ -16,7 +16,76 @@ import {
 import { mapObject, insertObjectToMap, removeObjectFromMap } from '../../util';
 
 const initialState = {
-    list: {},
+    list: {
+        1: {
+            id: 1,
+            address: '1234 rainbow street n',
+            city: 'Hollywood',
+            state: 'ca',
+            zip: '90210',
+            description:
+                'Premium apartment unit, 3 bed/bath, spacious, room service',
+            canHaveChildren: false,
+            propertyType: 'apartment',
+            floors: 2,
+            beds: 3,
+            baths: 3,
+            amenities: null,
+            price: 5000,
+            owner: 3,
+        },
+        2: {
+            id: 2,
+            address: '1234 rainbow street n',
+            city: 'Hollywood',
+            state: 'ca',
+            zip: '90210',
+            description:
+                'Premium apartment unit, 3 bed/bath, spacious, room service',
+            canHaveChildren: false,
+            propertyType: 'apartment',
+            floors: 2,
+            beds: 3,
+            baths: 3,
+            amenities: null,
+            price: 5000,
+            owner: 4,
+        },
+        3: {
+            id: 3,
+            address: '1234 rainbow street n',
+            city: 'Hollywood',
+            state: 'ca',
+            zip: '90210',
+            description:
+                'Premium apartment unit, 3 bed/bath, spacious, room service',
+            canHaveChildren: false,
+            propertyType: 'apartment',
+            floors: 2,
+            beds: 3,
+            baths: 3,
+            amenities: null,
+            price: 5000,
+            owner: 2,
+        },
+        4: {
+            id: 4,
+            address: '1234 rainbow street n',
+            city: 'Hollywood',
+            state: 'ca',
+            zip: '90210',
+            description:
+                'Premium apartment unit, 3 bed/bath, spacious, room service',
+            canHaveChildren: false,
+            propertyType: 'apartment',
+            floors: 2,
+            beds: 3,
+            baths: 3,
+            amenities: null,
+            price: 5000,
+            owner: 4,
+        },
+    },
     active: {
         // default shape
         id: null,
@@ -56,7 +125,9 @@ export const property = (state = { ...initialState }, action) => {
                 },
             };
         case GET_PROPERTY_SUCCESS:
+            console.log('hello');
             const fetchedMappedPropertyList = mapObject(action.payload);
+            console.log(fetchedMappedPropertyList);
             return {
                 ...state,
                 list: { ...fetchedMappedPropertyList },

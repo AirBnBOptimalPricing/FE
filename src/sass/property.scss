@@ -3,6 +3,8 @@
         &:first-child {
             margin-top: 15px;
         }
+        cursor: pointer;
+        background: white;
         padding: 4%;
         width: 90%;
         margin: 0 auto;
@@ -10,6 +12,7 @@
         justify-content: flex-start;
         flex-flow: row;
         margin-bottom: 15px;
+        color: black;
         img {
             width: 150px;
             height: 150px;
@@ -20,6 +23,11 @@
         img {
             border-radius: 10px;
             box-shadow: 1px 1px 5px rgb(75, 75, 75);
+        }
+        &:hover {
+            background: darken($color: white, $amount: 15);
+            transform: scale(1.025);
+            transition: all 0.25s;
         }
     }
 

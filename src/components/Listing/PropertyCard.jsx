@@ -12,7 +12,6 @@ const PropertyCard = ({
     price,
     owner,
 }) => {
-    console.log(loggedInAs);
     return (
         <div className={`${className} property card`.trim()}>
             <img src="https://images.unsplash.com/photo-1559767949-0faa5c7e9992?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" />

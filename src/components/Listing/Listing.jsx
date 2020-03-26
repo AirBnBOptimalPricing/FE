@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 // import {
 //     CardColumns,
 //     Card,
@@ -12,17 +12,28 @@ import { useHistory } from 'react-router-dom';
 // import ListingPage from './ListingPage';
 import { connect } from 'react-redux';
 import { PropertyCard } from '../';
+import { getProperties } from '../../redux/actionCreators';
 
-const Listing = listing => {
-    const history = useHistory();
+const Listing = ({ list, status, getProperties }) => {
+    console.log(list, status);
+    // useEffect(() => {
+    //     // requires fix from BE to stop using cookies
+    //     getProperties();
+    // }, []);
+    // const history = useHistory();
 
-    const routeToListing = e => {
-        e.preventDefault();
-        history.push(`/listing/${listing.id}`);
-    };
+    // const routeToListing = e => {
+    //     e.preventDefault();
+    //     history.push(`/listing/${listing.id}`);
+    // };
+    const propertyCards = Object.values(list).map(property => (
+        <PropertyCard {...property} key={property.id} />
+    ));
 
     return (
         <div>
+            {propertyCards}
+
             <div className="cards-wrapper">
                 {/* this component will be rendered after the user cliks on "view Listing"  
     it is here temporarly for the construction. 
@@ -84,6 +95,11 @@ const Listing = listing => {
     );
 };
 
-const mapStateToProps = ({}) => ({});
+const mapStateToProps = state => {
+    return {
+        list: { ...state.property.list },
+        status: { ...state.property.status },
+    };
+};
 
-export default connect()(Listing);
+export default connect(mapStateToProps, { getProperties })(Listing);

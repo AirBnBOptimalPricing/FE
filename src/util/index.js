@@ -5,6 +5,7 @@ import { mapObject } from './mapObject';
 import { undoMapObject } from './undoMapObject';
 import { insertObjectToMap } from './insertObjectToMap';
 import { removeObjectFromMap } from './removeObjectFromMap';
+import { decodeToken } from './decodeToken';
 
 export {
     capitalize,
@@ -14,4 +15,5 @@ export {
     mapObject,
     insertObjectToMap,
     removeObjectFromMap,
+    decodeToken,
 };

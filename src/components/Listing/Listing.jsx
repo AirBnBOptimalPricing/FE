@@ -1,15 +1,15 @@
 import React from 'react';
-import {
-    CardColumns,
-    Card,
-    CardTitle,
-    CardText,
-    CardBody,
-    Button,
-    CardImg,
-} from 'reactstrap';
+// import {
+//     CardColumns,
+//     Card,
+//     CardTitle,
+//     CardText,
+//     CardBody,
+//     Button,
+//     CardImg,
+// } from 'reactstrap';
 import { useHistory } from 'react-router-dom';
-import ListingPage from './ListingPage';
+// import ListingPage from './ListingPage';
 
 const Listing = listing => {
     const history = useHistory();
@@ -25,7 +25,8 @@ const Listing = listing => {
                 {/* this component will be rendered after the user cliks on "view Listing"  
     it is here temporarly for the construction. 
     The url will need an Id to access the page*/}
-                <ListingPage />
+                {/* commented out your code to test property card component */}
+                {/* <ListingPage />
                 <CardColumns>
                     <Card>
                         <CardBody>
@@ -75,7 +76,7 @@ const Listing = listing => {
                             </Button>
                         </CardBody>
                     </Card>
-                </CardColumns>
+                </CardColumns> */}
             </div>
         </div>
     );

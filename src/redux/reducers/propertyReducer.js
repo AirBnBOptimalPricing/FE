@@ -15,9 +15,33 @@ import {
 
 import { mapObject, insertObjectToMap, removeObjectFromMap } from '../../util';
 
-import { initialState } from '../initialState';
+const initialState = {
+    list: {},
+    active: {
+        // default shape
+        id: null,
+        address: null,
+        city: null,
+        state: null,
+        zip: null,
+        description: null,
+        canHaveChildren: null,
+        propertyType: null,
+        floors: null,
+        beds: null,
+        baths: null,
+        amenities: null,
+        price: null,
+    },
+    status: {
+        isLoading: null,
+        errors: {
+            message: null,
+        },
+    },
+};
 
-export const property = (state = { ...initialState.property }, action) => {
+export const property = (state = { ...initialState }, action) => {
     switch (action.type) {
         case GET_PROPERTY_START:
             return {

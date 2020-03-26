@@ -1,6 +1,4 @@
-import { initialState } from '../initialState';
-
-export const modal = (state = { ...initialState.modal }, action) => {
+export const modal = (state = {}, action) => {
     switch (action.type) {
         default:
             return { ...state };

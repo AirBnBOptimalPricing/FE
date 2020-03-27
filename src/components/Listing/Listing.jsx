@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 // import {
 //     CardColumns,
 //     Card,
@@ -8,14 +8,13 @@ import React, { useEffect } from 'react';
 //     Button,
 //     CardImg,
 // } from 'reactstrap';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 // import ListingPage from './ListingPage';
 import { connect } from 'react-redux';
 import { PropertyCard } from '../';
 import { getProperties } from '../../redux/actionCreators';
 
 const Listing = ({ list, status, getProperties }) => {
-    console.log(list, status);
     // useEffect(() => {
     //     // requires fix from BE to stop using cookies
     //     getProperties();

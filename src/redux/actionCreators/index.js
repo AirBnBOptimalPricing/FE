@@ -5,6 +5,7 @@ import { addProperty } from './asyncAdd';
 import { setLoggedInUser } from './setLoggedInUser';
 import { getProperties } from './getProperties';
 import { toggleModal } from './toggleModal';
+import { logOutUser } from './logOutUser';
 
 export {
     authStart,
@@ -20,4 +21,5 @@ export {
     setLoggedInUser,
     getProperties,
     toggleModal,
+    logOutUser,
 };

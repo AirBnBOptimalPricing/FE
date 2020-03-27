@@ -21,9 +21,9 @@ function Login({ errors, touched }) {
                     <p>{errors.password}</p>
                 )}
                 <p>
-                    Don't have an account? <Link to="/register">SignUp</Link>
+                    Don't have an account? <Link to="/register">Sign up</Link>!
                 </p>
-                <button type="submit"> LogIn </button>
+                <button type="submit"> Login </button>
             </Form>
         </div>
     );

@@ -1,0 +1,31 @@
+.main_paragraph{
+    
+}
+
+img {
+    width: 150px;
+    height: 150px;
+}
+
+.team_container h2 {
+    text-align: center;
+}
+.team_container .team {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* margin: 0 auto; */
+    flex-wrap: nowrap;
+    text-align: center;
+    /* width: 80%; */
+    margin: 0% 12% 0% 12%;
+}
+
+.team_container .team .team_member {
+    width: 45%;
+    margin: auto;
+    padding: 3%;
+    border-color: blue;
+    border-style: solid;
+    
+}

@@ -4,6 +4,7 @@ import { addFail, addStart, addSuccess } from './addProperty';
 import { addProperty } from './asyncAdd';
 import { setLoggedInUser } from './setLoggedInUser';
 import { getProperties } from './getProperties';
+import { toggleModal } from './toggleModal';
 
 export {
     authStart,
@@ -18,4 +19,5 @@ export {
     addProperty,
     setLoggedInUser,
     getProperties,
+    toggleModal,
 };

@@ -6,13 +6,6 @@ const initialState = {
     },
 };
 
-const toggleModal = modalName => {
-    return {
-        type: TOGGLE_MODAL,
-        payload: modalName,
-    };
-};
-
 export const modal = (state = initialState, action) => {
     switch (action.type) {
         case TOGGLE_MODAL:

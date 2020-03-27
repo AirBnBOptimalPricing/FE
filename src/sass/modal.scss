@@ -12,8 +12,55 @@
 }
 
 .sidedrawer.modal {
+    display: flex;
+    flex-flow: column;
+    align-items: flex-end;
+
     .backdrop {
-        position: relative;
-        top: 55px;
+        position: fixed;
+        z-index: 5000;
+    }
+
+    .sidedrawer {
+        &-container {
+            background: white;
+            position: relative;
+            display: flex;
+            flex-flow: column;
+            z-index: 10000;
+            transform: translateY(56px);
+            box-shadow: 1px 1px 5px gray;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+
+            a,
+            div {
+                display: block;
+                color: black;
+                width: 200px;
+                font-size: 2rem;
+                padding: 15px 20px 10px 15px;
+                border-bottom: 2px solid $orange;
+
+                &:hover {
+                    background: darken($color: white, $amount: 15);
+                }
+            }
+
+            div {
+                border-bottom-left-radius: inherit;
+            }
+
+            a {
+                &:first-child {
+                    border-top: 2px solid $orange;
+                    border-top-left-radius: inherit;
+                }
+
+                &:last-child {
+                    border-bottom-left-radius: inherit;
+                }
+            }
+        }
     }
 }

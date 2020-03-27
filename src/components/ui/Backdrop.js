@@ -1,7 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { toggleModal } from '../../redux/actionCreators';
 
-const Backdrop = () => {
-    return <div className="backdrop"></div>;
+const Backdrop = ({ modalName, toggleModal }) => {
+    return (
+        <div className="backdrop" onClick={() => toggleModal(modalName)}></div>
+    );
 };
 
-export default Backdrop;
+export default connect(null, { toggleModal })(Backdrop);

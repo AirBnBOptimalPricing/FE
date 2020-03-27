@@ -21,7 +21,6 @@ const initialState = {
 export const auth = (state = initialState, action) => {
     switch (action.type) {
         case AUTH_START:
-            console.log('start state', state);
             return {
                 ...state,
                 isLoading: true,
@@ -35,7 +34,7 @@ export const auth = (state = initialState, action) => {
             let {
                 payload: { token },
             } = action;
-            const { id } = token ? decodeToken(token) : null;
+            const id = token ? decodeToken(token) : null;
             localStorage.setItem('token', token);
             return {
                 ...state,
@@ -45,7 +44,7 @@ export const auth = (state = initialState, action) => {
                     loggedInAs: {
                         id,
                     },
-                    token: action.payload.token,
+                    token,
                 },
             };
         case AUTH_FAILURE:
@@ -67,7 +66,7 @@ export const auth = (state = initialState, action) => {
                     ...state.user,
                     loggedInAs: {
                         ...state.user.loggedInAs,
-                        id: user.id,
+                        id: user,
                     },
                 },
             };

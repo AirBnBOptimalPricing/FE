@@ -11,6 +11,7 @@ import {
     Listing,
     Navigation,
     Property,
+    Modal,
 } from './';
 function App({ setLoggedInUser }) {
     useEffect(() => {
@@ -20,6 +21,7 @@ function App({ setLoggedInUser }) {
     return (
         <div className="App">
             <Navigation />
+            <Modal className="sidedrawer" />
             <div className="view">
                 <Switch>
                     <Route path="/property" exact component={Listing} />

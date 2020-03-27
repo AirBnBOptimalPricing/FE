@@ -1,4 +1,4 @@
-import { authStart, authFailure, authSuccess } from './auth';
+import { authStart, authFailure, loginSuccess, registerSuccess } from './auth';
 import { login, register } from './asyncAuth';
 import { addFail, addStart, addSuccess } from './addProperty';
 import { addProperty } from './asyncAdd';
@@ -8,7 +8,8 @@ import { getProperties } from './getProperties';
 export {
     authStart,
     authFailure,
-    authSuccess,
+    loginSuccess,
+    registerSuccess,
     login,
     register,
     addFail,

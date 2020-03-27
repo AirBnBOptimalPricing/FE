@@ -1,6 +1,7 @@
 import {
     AUTH_START,
-    AUTH_SUCCESS,
+    LOGIN_SUCCESS,
+    REGISTER_SUCCESS,
     AUTH_FAILURE,
     SET_LOGGED_IN_USER,
 } from '../actions';
@@ -30,9 +31,9 @@ export const auth = (state = initialState, action) => {
                 },
             };
 
-        case AUTH_SUCCESS:
+        case LOGIN_SUCCESS:
             const token = action.payload;
-            const userInfo = decodeToken(token);
+            const userInfo = token ? decodeToken(token) : { userId: null };
             localStorage.setItem('token', token);
             return {
                 ...state,
@@ -45,6 +46,12 @@ export const auth = (state = initialState, action) => {
                     token,
                 },
             };
+
+        case REGISTER_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+            };
         case AUTH_FAILURE:
             return {
                 ...state,
@@ -56,15 +63,25 @@ export const auth = (state = initialState, action) => {
                 },
             };
         case SET_LOGGED_IN_USER:
+            // userInfo should resemble
+            /**
+             * {
+             *  userId,
+             * ...
+             * }
+             */
             const localToken = localStorage.getItem('token');
-            const user = localToken ? decodeToken(localToken) : null;
+            const decodedToken = localToken
+                ? decodeToken(localToken)
+                : { userId: null };
+
             return {
                 ...state,
                 user: {
                     ...state.user,
                     loggedInAs: {
                         ...state.user.loggedInAs,
-                        id: user.userId,
+                        id: decodedToken.userId,
                     },
                 },
             };

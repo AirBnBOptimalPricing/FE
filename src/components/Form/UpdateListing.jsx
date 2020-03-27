@@ -3,6 +3,7 @@ import { Form, withFormik } from 'formik';
 import * as Yup from 'yup';
 import { useOptions } from '../../hooks';
 import { Input } from '../';
+import { connect } from 'react-redux';
 
 const UpdateForm = ({ errors, touched, initialValues, values, ...props }) => {
     const [floors, bedsAndBaths] = useOptions([{ amount: 5 }, { amount: 7 }]);
@@ -52,22 +53,17 @@ const UpdateForm = ({ errors, touched, initialValues, values, ...props }) => {
 
 // cannot make configuration file outside of this file
 const EnhancedUpdateForm = withFormik({
-    mapPropsToValues: props => {
-        console.log(props);
+    mapPropsToValues: ({
+        match: {
+            params: { id },
+        },
+        list,
+        ...props
+    }) => {
         // props has match, can pull id and then in redux, pull the information for a property
+        const { id: propertyID, ...property } = list[id];
         return {
-            address: '',
-            city: '',
-            state: '',
-            zip: '',
-            description: '',
-            canHaveChildren: false,
-            propertyType: '',
-            floors: 1,
-            beds: 1,
-            baths: 1,
-            amenities: '',
-            price: '',
+            ...property,
         };
     },
     validationSchema: Yup.object().shape({
@@ -92,4 +88,6 @@ const EnhancedUpdateForm = withFormik({
     handleSubmit: (values, formikBag) => {},
 })(UpdateForm);
 
-export default EnhancedUpdateForm;
+const mapStateToProps = ({ property: { list } }) => ({ list });
+
+export default connect(mapStateToProps, {})(EnhancedUpdateForm);

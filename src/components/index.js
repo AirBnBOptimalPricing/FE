@@ -6,8 +6,10 @@ import Register from './Form/Register';
 import UpdateListing from './Form/UpdateListing';
 import PrivateRoute from './Route/PrivateRoute';
 import Input from './Form/Input';
-import Navigation from './Form/Navigation';
+import Navigation from './Navigation';
 import { Property, PropertyCard, Listing, ListingPage } from './Listing/';
+import Modal from './Modal';
+import Backdrop from './Backdrop';
 
 export {
     App,
@@ -23,4 +25,6 @@ export {
     PropertyCard,
     Property,
     ListingPage,
+    Modal,
+    Backdrop,
 };

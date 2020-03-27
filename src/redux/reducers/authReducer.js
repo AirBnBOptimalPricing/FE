@@ -5,7 +5,7 @@ import {
     AUTH_FAILURE,
     SET_LOGGED_IN_USER,
 } from '../actions';
-import { decodeToken } from '../../util';
+import { decodeToken, withToken } from '../../util';
 
 const initialState = {
     isLoading: null,
@@ -20,6 +20,7 @@ const initialState = {
 };
 
 export const auth = (state = initialState, action) => {
+    const [localToken, setLocalToken] = withToken();
     switch (action.type) {
         case AUTH_START:
             return {
@@ -34,7 +35,7 @@ export const auth = (state = initialState, action) => {
         case LOGIN_SUCCESS:
             const token = action.payload;
             const userInfo = token ? decodeToken(token) : { userId: null };
-            localStorage.setItem('token', token);
+            setLocalToken('token', token);
             return {
                 ...state,
                 isLoading: false,
@@ -70,7 +71,6 @@ export const auth = (state = initialState, action) => {
              * ...
              * }
              */
-            const localToken = localStorage.getItem('token');
             const decodedToken = localToken
                 ? decodeToken(localToken)
                 : { userId: null };

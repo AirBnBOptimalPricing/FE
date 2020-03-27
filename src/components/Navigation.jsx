@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 // import { NavLink, NavbarBrand, Navbar, Nav, NavItem } from 'reactstrap';
 import { toggleModal } from '../redux/actionCreators';
+import { NavMenu } from './';
 
 const Navigation = ({ className = '', toggleModal }) => {
     const openSideDrawer = () => {
@@ -14,6 +15,7 @@ const Navigation = ({ className = '', toggleModal }) => {
             <Link className="nav-brand" to="/property">
                 AirBnB Optimal
             </Link>
+            <NavMenu />
             <div className="nav-sidedrawer button" onClick={openSideDrawer}>
                 <div></div>
                 <div></div>

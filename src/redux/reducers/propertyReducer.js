@@ -86,22 +86,7 @@ const initialState = {
             owner: 4,
         },
     },
-    active: {
-        // default shape
-        id: null,
-        address: null,
-        city: null,
-        state: null,
-        zip: null,
-        description: null,
-        canHaveChildren: null,
-        propertyType: null,
-        floors: null,
-        beds: null,
-        baths: null,
-        amenities: null,
-        price: null,
-    },
+
     status: {
         isLoading: null,
         errors: {

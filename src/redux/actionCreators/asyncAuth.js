@@ -5,7 +5,7 @@ export const login = credentials => async dispatch => {
     dispatch(authStart());
     try {
         const response = await withAuth('/auth/login/', 'post', credentials);
-        const payload = { token: response.data.token };
+        const payload = response.data.token;
         dispatch(authSuccess(payload));
         return { message: 'Logged in successfully' };
     } catch (error) {

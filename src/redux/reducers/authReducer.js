@@ -31,10 +31,8 @@ export const auth = (state = initialState, action) => {
             };
 
         case AUTH_SUCCESS:
-            let {
-                payload: { token },
-            } = action;
-            const id = token ? decodeToken(token) : null;
+            const token = action.payload;
+            const userInfo = decodeToken(token);
             localStorage.setItem('token', token);
             return {
                 ...state,
@@ -42,7 +40,7 @@ export const auth = (state = initialState, action) => {
                 user: {
                     ...state.user,
                     loggedInAs: {
-                        id,
+                        id: userInfo.userId,
                     },
                     token,
                 },
@@ -66,7 +64,7 @@ export const auth = (state = initialState, action) => {
                     ...state.user,
                     loggedInAs: {
                         ...state.user.loggedInAs,
-                        id: user,
+                        id: user.userId,
                     },
                 },
             };

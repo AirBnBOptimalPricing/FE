@@ -38,24 +38,32 @@ const PropertyCard = ({
                         <p>Price: {`$${price}`}</p>
                     </div>
                 </section>
-                {/* {// conditionally render only if the owner is looking at them */}
-                {/* owner === loggedInAs.id && ( */}
-                <div className="property-controls">
-                    <div className="edit" onClick={e => e.stopPropagation()}>
-                        Edit
+                {// conditionally render only if the owner is looking at them
+                owner === loggedInAs.id && (
+                    <div className="property-controls">
+                        <div
+                            className="edit"
+                            onClick={e => e.stopPropagation()}>
+                            Edit
+                        </div>
+                        <div
+                            className="delete"
+                            onClick={e => e.stopPropagation()}>
+                            Delete
+                        </div>
                     </div>
-                    <div className="delete" onClick={e => e.stopPropagation()}>
-                        Delete
-                    </div>
-                </div>
-                {/* )} */}
+                )}
             </div>
         </div>
     );
 };
 
-const mapStateToProps = ({ auth: { user } }) => {
-    return { loggedInAs: { ...user.loggedInAs } };
+const mapStateToProps = ({
+    auth: {
+        user: { loggedInAs },
+    },
+}) => {
+    return { loggedInAs: { ...loggedInAs } };
 };
 
 export default connect(mapStateToProps, {})(PropertyCard);

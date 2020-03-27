@@ -21,7 +21,7 @@ export const register = credentials => async dispatch => {
         const response = await withAuth('/auth/register/', 'post', credentials);
         const payload = { token: '' };
         dispatch(authSuccess(payload));
-        return { message: 'Registration successful' };
+        return response;
     } catch (error) {
         console.log(error);
         dispatch(authFailure(error));

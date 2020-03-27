@@ -15,7 +15,9 @@
         color: black;
         img {
             width: 150px;
+            min-width: 150px;
             height: 150px;
+            min-height: 150px;
             position: relative;
             left: -25px;
         }
@@ -69,6 +71,35 @@
         }
         .delete {
             background: rgb(200, 0, 0);
+        }
+    }
+
+    &.listing {
+        background: white;
+        transform: translateY(30px);
+        width: 90%;
+        margin: 0 auto;
+        display: flex;
+        flex-flow: column;
+        img {
+            display: block;
+            width: 300px;
+            margin: 0 auto;
+            transform: translateY(-30px);
+        }
+
+        &,
+        img {
+            border-radius: 15px;
+            box-shadow: 1.5px 1.5px 5px black;
+        }
+
+        h4 {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 800;
+            transform: translateY(-15px);
+            margin-bottom: 0;
         }
     }
 }

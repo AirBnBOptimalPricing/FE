@@ -1,36 +1,42 @@
 import React from 'react';
 import { withToken } from '../util';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { logOutUser } from '../redux/actionCreators';
 
-const NavMenu = () => {
-    const [token] = withToken();
+const NavMenu = ({ logOutUser, token }) => {
+    // first grab token from store
+    const history = useHistory();
+
+    // if not there, we will use localStorage to find a token if present
+    if (!token) {
+        // if no token or not null
+        [token] = withToken();
+    }
+
+    console.log(history);
+
+    const logOut = e => {
+        logOutUser();
+        history.push('/login');
+    };
+
+    console.log(token);
     return (
         <div className={`nav-menu`.trim()}>
             <Link
                 className="nav-menu-link"
+                to="/property"
                 //ref={homeRef}
             >
                 Home
             </Link>
             <Link
                 className="nav-menu-link"
+                to="/property"
                 // ref={aboutRef}
             >
                 About
-            </Link>
-            <Link
-                to="/login"
-                className="nav-menu-link"
-                // ref={loginRef}
-                hidden={token ? true : false}>
-                Login
-            </Link>
-            <Link
-                to="/register"
-                className="nav-menu-link"
-                // ref={registerRef}
-                hidden={token ? true : false}>
-                Register
             </Link>
             <Link
                 to="/property"
@@ -46,14 +52,27 @@ const NavMenu = () => {
                 hidden={token ? false : true}>
                 Add Property
             </Link>
+            <Link
+                to="/register"
+                className="nav-menu-link"
+                // ref={registerRef}
+                hidden={token ? true : false}>
+                Register
+            </Link>
             <div
                 className="nav-menu-link"
                 // ref={logoutRef}
-                hidden={token ? false : true}>
-                Log out
+                onClick={logOut}>
+                Log {token ? 'out' : 'in'}
             </div>
         </div>
     );
 };
 
-export default NavMenu;
+const mapStateToProps = ({
+    auth: {
+        user: { token },
+    },
+}) => ({ token });
+
+export default connect(mapStateToProps, { logOutUser })(NavMenu);

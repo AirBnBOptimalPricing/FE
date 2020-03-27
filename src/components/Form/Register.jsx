@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { withFormik, Form } from 'formik';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
@@ -6,13 +6,7 @@ import { connect } from 'react-redux';
 import { Input } from '../';
 import { register } from '../../redux/actionCreators';
 
-const Register = ({ values, errors, touched, status }) => {
-    const [users, setUsers] = useState([]);
-
-    useEffect(() => {
-        status && setUsers(users => [...users, status]);
-    }, [status]);
-
+const Register = ({ errors, touched }) => {
     return (
         <div className="form">
             <header>

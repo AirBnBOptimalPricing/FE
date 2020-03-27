@@ -14,7 +14,7 @@ const initialState = {
         message: null,
     },
     user: {
-        loggedInAs: null,
+        loggedInAs: { id: null },
         token: null,
     },
 };

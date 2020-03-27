@@ -1,0 +1,33 @@
+.form {
+    font-size: 1.25rem;
+
+    &-header {
+        text-align: center;
+        font-size: 2rem;
+    }
+
+    button {
+        background: lighten($color: $blue, $amount: 5);
+        color: white;
+    }
+
+    &-update {
+        font-size: 1.1rem;
+        font-weight: 600;
+        padding: 7px 15px;
+    }
+}
+
+.form-input {
+    display: flex;
+    margin-bottom: 10px;
+    justify-content: space-between;
+    padding: 0 5%;
+}
+
+.checkbox {
+    & > label {
+        margin-left: 10px;
+        margin-right: auto;
+    }
+}

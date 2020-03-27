@@ -1,0 +1,42 @@
+.nav {
+    font-size: 1.45rem;
+    padding: 15px 4%;
+    background-color: $orange;
+    position: fixed;
+    z-index: 50;
+    width: 100vw;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 2px 4px gray;
+    &-brand {
+        width: 60px;
+        line-height: 13px;
+        letter-spacing: 0.1rem;
+        color: white;
+        font-weight: bold;
+        word-wrap: break-word;
+    }
+
+    &-sidedrawer.button {
+        padding: 6px 5px;
+        border-radius: 5px;
+        box-shadow: 2px 2px 2px darken($color: $orange, $amount: 25);
+        display: flex;
+        flex-flow: column;
+        justify-content: space-between;
+        background: darken($color: $orange, $amount: 15);
+
+        &:active {
+            box-shadow: 2px 2px 2px darken($color: $orange, $amount: 25) inset;
+        }
+
+        & > div {
+            background: white;
+            width: 20px;
+            height: 2px;
+            margin: 0 auto;
+            border-radius: 10px;
+        }
+    }
+}

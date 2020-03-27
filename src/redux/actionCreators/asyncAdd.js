@@ -1,5 +1,5 @@
-import { addStart, addFail, addSuccess } from './addProperty';
-import { withAuth } from '../../util';
+// import { addStart, addFail, addSuccess } from './addProperty';
+// import { withAuth } from '../../util';
 export const addProperty = property => async dispatch => {
     console.log('start');
     // dispatch(addStart);

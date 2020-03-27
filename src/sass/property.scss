@@ -20,6 +20,10 @@
             min-height: 150px;
             position: relative;
             left: -27px;
+
+            @media (min-width: $medium) {
+                left: -50px;
+            }
         }
         &,
         img {
@@ -64,13 +68,29 @@
             font-weight: 800;
             font-size: 1.5rem;
 
+            &:hover {
+                background: lighten($color: $blue, $amount: 15);
+            }
+
             &:active {
                 background: darken($color: $blue, $amount: 15);
                 box-shadow: 1px 1px 0 black inset;
             }
         }
         .delete {
-            background: rgb(200, 0, 0);
+            background: $red;
+
+            &:hover {
+                background: lighten($color: $red, $amount: 15);
+            }
+
+            &:active {
+                background: darken($color: $red, $amount: 15);
+            }
+        }
+
+        @media (min-width: $medium) {
+            margin-top: 30px;
         }
     }
 
@@ -81,6 +101,7 @@
         margin: 0 auto;
         display: flex;
         flex-flow: column;
+        padding-bottom: 25px;
         img {
             display: block;
             width: 300px;
@@ -145,7 +166,7 @@
 
         .property-controls {
             width: 60%;
-            margin: 10px auto 25px;
+            margin: 10px auto 0;
         }
     }
 }

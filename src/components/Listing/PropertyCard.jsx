@@ -16,7 +16,6 @@ const PropertyCard = ({
 }) => {
     const location = useLocation();
     const history = useHistory();
-    console.log(owner, loggedInAs);
     return (
         <div
             onClick={e => {

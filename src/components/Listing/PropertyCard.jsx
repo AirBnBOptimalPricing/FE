@@ -43,7 +43,10 @@ const PropertyCard = ({
                     <div className="property-controls">
                         <div
                             className="edit"
-                            onClick={e => e.stopPropagation()}>
+                            onClick={e => {
+                                e.stopPropagation();
+                                history.push(`/property/${id}/edit`);
+                            }}>
                             Edit
                         </div>
                         <div

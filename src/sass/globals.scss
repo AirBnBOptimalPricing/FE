@@ -9,7 +9,6 @@ body {
         'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-
     background: linear-gradient(120deg, #f6d365 0%, #fda085 100%) center fixed
         no-repeat;
 }
@@ -82,4 +81,7 @@ a {
     position: relative;
     top: 50px;
     margin-top: 25px;
+}
+
+.App {
 }

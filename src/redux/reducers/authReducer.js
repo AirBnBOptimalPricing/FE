@@ -9,7 +9,7 @@ import {
 import { decodeToken, withToken } from '../../util';
 
 const initialState = {
-    isLoading: null,
+    isLoading: false,
     status: null,
     error: {
         message: null,

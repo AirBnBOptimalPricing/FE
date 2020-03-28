@@ -7,6 +7,7 @@ import { getProperties, getSingleProperty } from './getProperties';
 import { toggleModal } from './toggleModal';
 import { logOutUser } from './logOutUser';
 import { deleteProperty } from './deleteProperty';
+import { updateProperty } from './updateProperty';
 
 export {
     authStart,
@@ -25,4 +26,5 @@ export {
     logOutUser,
     getSingleProperty,
     deleteProperty,
+    updateProperty,
 };

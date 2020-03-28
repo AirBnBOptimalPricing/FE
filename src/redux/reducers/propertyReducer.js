@@ -59,7 +59,6 @@ export const property = (state = { ...initialState }, action) => {
             };
         case GET_PROPERTY_SUCCESS:
             const fetchedMappedPropertyList = mapObject(action.payload);
-            console.log(fetchedMappedPropertyList);
             return {
                 ...state,
                 list: { ...fetchedMappedPropertyList },
@@ -151,7 +150,8 @@ export const property = (state = { ...initialState }, action) => {
             };
         case UPDATE_PROPERTY_SUCCESS:
             // payload is updated object with id
-            let { id } = action.payload;
+            let { id } = JSON.parse(action.payload);
+            console.log(action.payload);
             const property = { ...state.list[id], ...action.payload };
             return {
                 ...state,

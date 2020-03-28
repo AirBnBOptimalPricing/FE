@@ -2,10 +2,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { toggleModal } from '../../redux/actionCreators';
 
-const Backdrop = ({ modalName, toggleModal }) => {
-    return (
-        <div className="backdrop" onClick={() => toggleModal(modalName)}></div>
-    );
+const Backdrop = ({ modalName, toggleModal, authLoading, propertyLoading }) => {
+    const clickHandler = () => {
+        return authLoading || propertyLoading ? null : toggleModal();
+    };
+
+    return <div className="backdrop" onClick={clickHandler}></div>;
 };
 
-export default connect(null, { toggleModal })(Backdrop);
+const mapStateToProps = ({
+    auth: { isLoading: authLoading },
+    property: {
+        status: { isLoading: propertyLoading },
+    },
+}) => ({ authLoading, propertyLoading });
+
+export default connect(mapStateToProps, { toggleModal })(Backdrop);

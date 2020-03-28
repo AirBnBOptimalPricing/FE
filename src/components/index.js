@@ -10,7 +10,7 @@ import {
 import PrivateRoute from './Route/PrivateRoute';
 import Navigation from './Navigation';
 import { Property, PropertyCard, Listing, ListingPage } from './Listing/';
-import { Modal, Backdrop, SideDrawerModal } from './ui/';
+import { Modal, Backdrop, SideDrawerModal, Loader, LoadingModal } from './ui/';
 import NavMenu from './NavMenu';
 
 export {
@@ -31,4 +31,6 @@ export {
     Backdrop,
     SideDrawerModal,
     NavMenu,
+    Loader,
+    LoadingModal,
 };

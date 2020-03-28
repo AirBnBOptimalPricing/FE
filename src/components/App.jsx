@@ -12,6 +12,7 @@ import {
     Navigation,
     Property,
     SideDrawerModal,
+    LoadingModal,
 } from './';
 function App({ setLoggedInUser }) {
     useEffect(() => {
@@ -22,6 +23,7 @@ function App({ setLoggedInUser }) {
         <div className="App">
             <Navigation />
             <SideDrawerModal />
+            <LoadingModal />
             <div className="view">
                 <Switch>
                     <Route path="/login" component={Login} />

@@ -126,10 +126,10 @@ export const property = (state = { ...initialState }, action) => {
                 ...state,
                 list: {},
                 status: {
-                    ...state,
+                    ...state.status,
                     isLoading: false,
                     errors: {
-                        ...state.errors,
+                        ...state.status.errors,
                         message: action.payload.message,
                     },
                 },
@@ -166,7 +166,7 @@ export const property = (state = { ...initialState }, action) => {
                     ...state.status,
                     isLoading: false,
                     errors: {
-                        ...state.errors,
+                        ...state.status.errors,
                         message: action.payload.message,
                     },
                 },
@@ -204,9 +204,9 @@ export const property = (state = { ...initialState }, action) => {
                 ...state,
                 status: {
                     ...state.status,
-                    isLoading: true,
+                    isLoading: false,
                     errors: {
-                        ...state.errors,
+                        ...state.status.errors,
                         message: action.payload.message,
                     },
                 },
@@ -241,9 +241,9 @@ export const property = (state = { ...initialState }, action) => {
                 ...state,
                 status: {
                     ...state.status,
-                    isLoading: true,
+                    isLoading: false,
                     errors: {
-                        ...state.errors,
+                        ...state.status.errors,
                         message: action.payload.message,
                     },
                 },

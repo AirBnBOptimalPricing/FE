@@ -10,8 +10,7 @@ export const login = credentials => async dispatch => {
         dispatch(loginSuccess(payload));
         return { message: 'Logged in successfully' };
     } catch (error) {
-        console.log(error);
-        dispatch(authFailure(error));
+        dispatch(authFailure(error.response.data));
         return { error };
     }
 };
@@ -23,8 +22,7 @@ export const register = credentials => async dispatch => {
         dispatch(registerSuccess);
         return response;
     } catch (error) {
-        console.log(error);
-        dispatch(authFailure(error));
+        dispatch(authFailure(error.response.data));
         return { error };
     }
 };

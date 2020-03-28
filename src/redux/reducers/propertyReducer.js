@@ -11,80 +11,28 @@ import {
     DELETE_PROPERTY_FAILURE,
     DELETE_PROPERTY_START,
     DELETE_PROPERTY_SUCCESS,
+    GET_SINGLE_PROPERTY_SUCCESS,
 } from '../actions';
 
-import { mapObject, insertObjectToMap, removeObjectFromMap } from '../../util';
+import { mapObject, removeObjectFromMap } from '../../util';
 
 const initialState = {
-    list: {
-        1: {
-            id: 1,
-            address: '1234 rainbow street n',
-            city: 'Hollywood',
-            state: 'ca',
-            zip: '90210',
-            description:
-                'Premium apartment unit, 3 bed/bath, spacious, room service',
-            canHaveChildren: false,
-            propertyType: 'apartment',
-            floors: 2,
-            beds: 3,
-            baths: 3,
-            amenities: null,
-            price: 5000,
-            owner: 3,
-        },
-        2: {
-            id: 2,
-            address: '1234 rainbow street n',
-            city: 'Hollywood',
-            state: 'ca',
-            zip: '90210',
-            description:
-                'Premium apartment unit, 3 bed/bath, spacious, room service',
-            canHaveChildren: false,
-            propertyType: 'apartment',
-            floors: 2,
-            beds: 3,
-            baths: 3,
-            amenities: null,
-            price: 5000,
-            owner: 4,
-        },
-        3: {
-            id: 3,
-            address: '1234 rainbow street n',
-            city: 'Hollywood',
-            state: 'ca',
-            zip: '90210',
-            description:
-                'Premium apartment unit, 3 bed/bath, spacious, room service',
-            canHaveChildren: false,
-            propertyType: 'apartment',
-            floors: 2,
-            beds: 3,
-            baths: 3,
-            amenities: null,
-            price: 5000,
-            owner: 2,
-        },
-        4: {
-            id: 4,
-            address: '1234 rainbow street n',
-            city: 'Hollywood',
-            state: 'ca',
-            zip: '90210',
-            description:
-                'Premium apartment unit, 3 bed/bath, spacious, room service',
-            canHaveChildren: false,
-            propertyType: 'apartment',
-            floors: 2,
-            beds: 3,
-            baths: 3,
-            amenities: null,
-            price: 5000,
-            owner: 4,
-        },
+    list: {},
+    active: {
+        id: 0,
+        address: '',
+        city: '',
+        state: '',
+        zip: Number.parseInt('00000'),
+        description: '',
+        children_allowed: false,
+        property_type: '',
+        floors: 0,
+        bedrooms_number: 0,
+        bathrooms_number: 0,
+        amenities: '',
+        price: Number.parseFloat(0),
+        owner: {},
     },
 
     status: {
@@ -110,7 +58,6 @@ export const property = (state = { ...initialState }, action) => {
                 },
             };
         case GET_PROPERTY_SUCCESS:
-            console.log('hello');
             const fetchedMappedPropertyList = mapObject(action.payload);
             console.log(fetchedMappedPropertyList);
             return {
@@ -121,6 +68,21 @@ export const property = (state = { ...initialState }, action) => {
                     isLoading: false,
                 },
             };
+
+        case GET_SINGLE_PROPERTY_SUCCESS: {
+            const property = action.payload;
+            return {
+                ...state,
+                status: {
+                    ...state.status,
+                    isLoading: false,
+                },
+                active: {
+                    ...property,
+                },
+            };
+        }
+
         case GET_PROPERTY_FAILURE:
             return {
                 ...state,
@@ -148,13 +110,16 @@ export const property = (state = { ...initialState }, action) => {
             };
         case CREATE_PROPERTY_SUCCESS:
             // add to list by reconverting list back to array and subjecting to mapObject
-            const newlyCreatedPropertyList = insertObjectToMap(
-                action.payload,
-                state.list,
-            );
+            // issue -> action.payload => id of newly created object
+            // solution, query /user/:id
+            // solution won't work due to async nature and synchronous nature of redux
+            // const newlyCreatedPropertyList = insertObjectToMap(
+            //     action.payload,
+            //     state.list,
+            // );
             return {
                 ...state,
-                list: { ...newlyCreatedPropertyList },
+                // list: { ...newlyCreatedPropertyList },
                 status: {
                     isLoading: false,
                 },

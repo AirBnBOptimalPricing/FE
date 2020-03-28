@@ -15,10 +15,10 @@ import { PropertyCard } from '../';
 import { getProperties } from '../../redux/actionCreators';
 
 const Listing = ({ list, status, getProperties }) => {
-    // useEffect(() => {
-    //     // requires fix from BE to stop using cookies
-    //     getProperties();
-    // }, []);
+    useEffect(() => {
+        //     // requires fix from BE to stop using cookies
+        getProperties();
+    }, []);
     // const history = useHistory();
 
     // const routeToListing = e => {

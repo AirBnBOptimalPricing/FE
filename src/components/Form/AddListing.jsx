@@ -5,6 +5,8 @@ import { useOptions } from '../../hooks';
 import { Input } from '../';
 import { connect } from 'react-redux';
 import { addProperty } from '../../redux/actionCreators/';
+import { compose } from 'redux';
+import { withRouter } from 'react-router-dom';
 
 const AddForm = ({ errors, touched }) => {
     const [floors, bedsAndBaths] = useOptions([{ amount: 5 }, { amount: 7 }]);
@@ -51,97 +53,100 @@ const AddForm = ({ errors, touched }) => {
 };
 
 // cannot make configuration file outside of this file
-const EnhancedAddForm = withFormik({
-    mapPropsToValues: ({
-        address = '',
-        city = '',
-        state = '',
-        zip = '',
-        description = '',
-        canHaveChildren = false,
-        propertyType = '',
-        floors = 1,
-        beds = 1,
-        baths = 1,
-        amenities = '',
-        price = '',
-    }) => ({
-        address,
-        city,
-        state,
-        zip,
-        description,
-        canHaveChildren,
-        propertyType,
-        floors,
-        beds,
-        baths,
-        amenities,
-        price,
-    }),
-    validationSchema: Yup.object().shape({
-        // form shape goes here with validation
-        address: Yup.string().required(),
-        city: Yup.string().required(),
-        state: Yup.string()
-            .min(2)
-            .required(),
-        zip: Yup.string()
-            .required()
-            .min(5),
-        description: Yup.string().required(),
-        canHaveChildren: Yup.boolean().oneOf([true, false]),
-        propertyType: Yup.string().required(), // what kind of property types are there? commerical/residential
-        floors: Yup.string(),
-        beds: Yup.number(),
-        baths: Yup.number(),
-        amenities: Yup.string().required(),
-        price: Yup.number().required(),
-    }),
-    handleSubmit: (
-        {
-            canHaveChildren: children_allowed,
-            beds: bedrooms_number,
-            baths: bathrooms_number,
-            propertyType: property_type,
+const EnhancedAddForm = compose(
+    withRouter,
+    withFormik({
+        mapPropsToValues: ({
+            address = '',
+            city = '',
+            state = '',
+            zip = '',
+            description = '',
+            canHaveChildren = false,
+            propertyType = '',
+            floors = 1,
+            beds = 1,
+            baths = 1,
+            amenities = '',
+            price = '',
+        }) => ({
+            address,
+            city,
+            state,
+            zip,
+            description,
+            canHaveChildren,
+            propertyType,
             floors,
-            ...values
-        },
-        { props: { addProperty }, history, resetForm },
-    ) => {
-        const property = {
-            ...values,
-            zip: Number.parseInt(values.zip),
-            children_allowed,
-            bathrooms_number,
-            bedrooms_number,
-            property_type,
-        };
-        addProperty(property).then(id => {
-            // on success
-            console.log('success?');
-            resetForm({
-                address: '',
-                city: '',
-                state: '',
-                zip: '',
-                description: '',
-                canHaveChildren: false,
-                propertyType: '',
-                floors: 1,
-                beds: 1,
-                baths: 1,
-                amenities: '',
-                price: '',
-            });
+            beds,
+            baths,
+            amenities,
+            price,
+        }),
+        validationSchema: Yup.object().shape({
+            // form shape goes here with validation
+            address: Yup.string().required(),
+            city: Yup.string().required(),
+            state: Yup.string()
+                .min(2)
+                .required(),
+            zip: Yup.string()
+                .required()
+                .min(5),
+            description: Yup.string().required(),
+            canHaveChildren: Yup.boolean().oneOf([true, false]),
+            propertyType: Yup.string().required(), // what kind of property types are there? commerical/residential
+            floors: Yup.string(),
+            beds: Yup.number(),
+            baths: Yup.number(),
+            amenities: Yup.string().required(),
+            price: Yup.number().required(),
+        }),
+        handleSubmit: (
+            {
+                canHaveChildren: children_allowed,
+                beds: bedrooms_number,
+                baths: bathrooms_number,
+                propertyType: property_type,
+                floors,
+                ...values
+            },
+            { props: { addProperty, history }, resetForm },
+        ) => {
+            const property = {
+                ...values,
+                zip: Number.parseInt(values.zip),
+                children_allowed,
+                bathrooms_number,
+                bedrooms_number,
+                property_type,
+            };
+            addProperty(property).then(id => {
+                // on success
+                console.log('success?');
+                resetForm({
+                    address: '',
+                    city: '',
+                    state: '',
+                    zip: '',
+                    description: '',
+                    canHaveChildren: false,
+                    propertyType: '',
+                    floors: 1,
+                    beds: 1,
+                    baths: 1,
+                    amenities: '',
+                    price: '',
+                });
 
-            history.push(`/property/${id}`);
-        });
-        console.log().catch(err => {
-            console.log('error happened', err.config, err.response);
-        });
-    },
-})(AddForm);
+                history.push(`/property/`);
+            });
+            console.log().catch(err => {
+                console.log('error happened', err.config, err.response);
+            });
+        },
+    }),
+)(AddForm);
 
 const mapStateToProps = ({
     property: {

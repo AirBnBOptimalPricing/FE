@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { getSingleProperty } from '../../redux/actionCreators';
 
 const Property = ({
     className = '',
@@ -7,10 +8,9 @@ const Property = ({
         params: { id },
     },
     history,
-    list,
     loggedInAs,
-}) => {
-    const {
+    getSingleProperty,
+    active: {
         id: propertyId,
         address,
         city,
@@ -25,7 +25,29 @@ const Property = ({
         // amenities,
         price,
         owner,
-    } = list[id]; // the way list is set up this is how to extract property
+    },
+}) => {
+    // const {
+    //     id: propertyId,
+    //     address,
+    //     city,
+    //     state,
+    //     zip,
+    //     description,
+    //     canHaveChildren,
+    //     propertyType,
+    //     floors,
+    //     beds,
+    //     baths,
+    //     // amenities,
+    //     price,
+    //     owner,
+    // } = list[id]; // the way list is set up this is how to extract property
+
+    useEffect(() => {
+        getSingleProperty(id);
+        // eslint-disable-next-line
+    }, []);
     return (
         <div className={`${className} property listing`.trim()}>
             <img
@@ -35,9 +57,8 @@ const Property = ({
             <h2 className="price">&euro;{price}</h2>
             <header>
                 <h4>{address}</h4>
-                <div>{`${city}, ${state.toUpperCase()}, ${zip}`}</div>
+                <div>{`${city}, ${state}, ${zip}`}</div>
             </header>
-
             <section className="body">
                 <div className="description">Description: {description}</div>
                 <div className="children separate">
@@ -60,33 +81,32 @@ const Property = ({
                     <p>{floors}</p>
                 </div>
             </section>
-            {owner === loggedInAs.id && (
-                <div className="property-controls">
-                    <div
-                        className="edit"
-                        onClick={e => {
-                            e.stopPropagation();
-                            history.push(`/property/${id}/edit`);
-                        }}>
-                        Edit
-                    </div>
-                    <div className="delete" onClick={e => e.stopPropagation()}>
-                        Delete
-                    </div>
+            {/* {owner === loggedInAs.id &&  */}
+            <div className="property-controls">
+                <div
+                    className="edit"
+                    onClick={e => {
+                        e.stopPropagation();
+                        history.push(`/property/${id}/edit`);
+                    }}>
+                    Edit
                 </div>
-            )}
+                <div className="delete" onClick={e => e.stopPropagation()}>
+                    Delete
+                </div>
+            </div>
         </div>
     );
 };
 
 const mapStateToProps = ({
-    property: { list },
+    property: { active },
     auth: {
         user: { loggedInAs },
     },
 }) => ({
-    list,
+    active,
     loggedInAs,
 });
 
-export default connect(mapStateToProps, {})(Property);
+export default connect(mapStateToProps, { getSingleProperty })(Property);

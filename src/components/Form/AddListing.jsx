@@ -95,7 +95,7 @@ const EnhancedAddForm = compose(
                 .min(5),
             description: Yup.string().required(),
             canHaveChildren: Yup.boolean().oneOf([true, false]),
-            propertyType: Yup.string().required(), // what kind of property types are there? commerical/residential
+            propertyType: Yup.string(), // what kind of property types are there? commerical/residential
             floors: Yup.string(),
             beds: Yup.number(),
             baths: Yup.number(),

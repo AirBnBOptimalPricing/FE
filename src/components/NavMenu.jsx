@@ -14,8 +14,6 @@ const NavMenu = ({ logOutUser, token }) => {
         [token] = withToken();
     }
 
-    console.log(history);
-
     const logOut = e => {
         logOutUser();
         history.push('/login');

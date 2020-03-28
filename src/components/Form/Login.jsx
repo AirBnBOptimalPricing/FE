@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { Input } from '../';
 import { login } from '../../redux/actionCreators';
 
-function Login({ errors, touched }) {
+function Login({ errors, touched, error }) {
     return (
         <div className="form">
             <header>
@@ -63,9 +63,8 @@ const LoginForm = withFormik({
     },
 })(Login);
 
-const mapStateToProps = ({ auth: { isLoading, error } }) => {
+const mapStateToProps = ({ auth: { error } }) => {
     return {
-        isLoading,
         error,
     };
 };

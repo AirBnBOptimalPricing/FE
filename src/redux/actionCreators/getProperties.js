@@ -22,10 +22,10 @@ const getFail = error => {
 export const getProperties = () => async dispatch => {
     dispatch(getStart());
     try {
-        const response = await withAuth('/user/', 'get');
+        const response = await withAuth('/user', 'get');
         dispatch(getSuccess(response.data));
         return;
     } catch (error) {
-        dispatch(getFail(error));
+        dispatch(getFail(error.response.data));
     }
 };

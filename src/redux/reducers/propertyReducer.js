@@ -172,7 +172,7 @@ export const property = (state = { ...initialState }, action) => {
                     isLoading: false,
                     errors: {
                         ...state.status.errors,
-                        message: action.payload.message,
+                        message: action.payload,
                     },
                 },
             };
@@ -191,7 +191,7 @@ export const property = (state = { ...initialState }, action) => {
             };
         case DELETE_PROPERTY_SUCCESS:
             // this is where we remove said object, we are given an id
-            const { id: propertyIdToDelete } = action.payload;
+            const propertyIdToDelete = action.payload;
             const listWithoutId = removeObjectFromMap(
                 propertyIdToDelete,
                 state.list,
@@ -209,7 +209,7 @@ export const property = (state = { ...initialState }, action) => {
                     isLoading: false,
                     errors: {
                         ...state.status.errors,
-                        message: action.payload.message,
+                        message: action.payload,
                     },
                 },
             };

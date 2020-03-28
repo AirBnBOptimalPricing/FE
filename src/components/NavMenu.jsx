@@ -40,7 +40,7 @@ const NavMenu = ({ logOutUser, token }) => {
                 to="/property"
                 className="nav-menu-link"
                 // ref={propertyRef}
-            >
+                hidden={token ? false : true}>
                 Properties
             </Link>
             <Link

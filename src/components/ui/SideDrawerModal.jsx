@@ -33,10 +33,16 @@ const SideDrawerModal = ({ show, toggleModal, token, logOutUser }) => {
         // timeline.from(logoutRef, { x: 500, duration: 0.25 });
     }, []);
 
-    const handleClick = e => {
-        logOutUser();
+    const handleClick = () => {
         history.push('/login');
         toggleModal('sideDrawer');
+    };
+
+    const logOut = e => {
+        e.preventDefault();
+        e.stopPropagation();
+        logOutUser();
+        history.push('/login');
     };
     return (
         <Modal
@@ -65,7 +71,7 @@ const SideDrawerModal = ({ show, toggleModal, token, logOutUser }) => {
                     to="/property"
                     className="sidedrawer-link"
                     // ref={propertyRef}
-                >
+                    hidden={token ? false : true}>
                     Properties
                 </Link>
                 <Link
@@ -85,7 +91,7 @@ const SideDrawerModal = ({ show, toggleModal, token, logOutUser }) => {
                     Register
                 </Link>
                 <div
-                    onClick={handleClick}
+                    onClick={logOut}
                     className="sidedrawer-link"
                     // ref={logoutRef}
                 >

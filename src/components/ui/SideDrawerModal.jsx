@@ -1,12 +1,12 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Modal } from '../';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { withToken } from '../../util';
 import { connect } from 'react-redux';
-import { toggleModal } from '../../redux/actionCreators';
+import { toggleModal, logOutUser } from '../../redux/actionCreators';
 // import { gsap } from 'gsap';
 
-const SideDrawerModal = ({ show, toggleModal }) => {
+const SideDrawerModal = ({ show, toggleModal, token, logOutUser }) => {
     // const homeRef = useRef(null);
     // const aboutRef = useRef(null);
     // const loginRef = useRef(null);
@@ -15,8 +15,11 @@ const SideDrawerModal = ({ show, toggleModal }) => {
     // const addPropertyRef = useRef(null);
     // const logoutRef = useRef(null);
 
-    const [token, _setToken] = withToken();
-    console.log(token ? true : false);
+    const history = useHistory();
+
+    if (!token) {
+        [token] = withToken();
+    }
     // const timeline = gsap.timeline({ paused: true });
 
     useEffect(() => {
@@ -30,8 +33,16 @@ const SideDrawerModal = ({ show, toggleModal }) => {
         // timeline.from(logoutRef, { x: 500, duration: 0.25 });
     }, []);
 
-    const handleClick = e => {
+    const handleClick = () => {
+        history.push('/login');
         toggleModal('sideDrawer');
+    };
+
+    const logOut = e => {
+        e.preventDefault();
+        e.stopPropagation();
+        logOutUser();
+        history.push('/login');
     };
     return (
         <Modal
@@ -40,6 +51,7 @@ const SideDrawerModal = ({ show, toggleModal }) => {
             <div
                 className={`sidedrawer-container ${show ? 'show' : ''}`.trim()}>
                 <Link
+                    to="/property"
                     onClick={handleClick}
                     className="sidedrawer-link"
                     //ref={homeRef}
@@ -47,6 +59,7 @@ const SideDrawerModal = ({ show, toggleModal }) => {
                     Home
                 </Link>
                 <Link
+                    to="/property"
                     onClick={handleClick}
                     className="sidedrawer-link"
                     // ref={aboutRef}
@@ -55,26 +68,10 @@ const SideDrawerModal = ({ show, toggleModal }) => {
                 </Link>
                 <Link
                     onClick={handleClick}
-                    to="/login"
-                    className="sidedrawer-link"
-                    // ref={loginRef}
-                    hidden={token ? true : false}>
-                    Login
-                </Link>
-                <Link
-                    to="/register"
-                    onClick={handleClick}
-                    className="sidedrawer-link"
-                    // ref={registerRef}
-                    hidden={token ? true : false}>
-                    Register
-                </Link>
-                <Link
-                    onClick={handleClick}
                     to="/property"
                     className="sidedrawer-link"
                     // ref={propertyRef}
-                >
+                    hidden={token ? false : true}>
                     Properties
                 </Link>
                 <Link
@@ -85,12 +82,20 @@ const SideDrawerModal = ({ show, toggleModal }) => {
                     hidden={token ? false : true}>
                     Add Property
                 </Link>
-                <div
+                <Link
+                    to="/register"
                     onClick={handleClick}
                     className="sidedrawer-link"
+                    // ref={registerRef}
+                    hidden={token ? true : false}>
+                    Register
+                </Link>
+                <div
+                    onClick={logOut}
+                    className="sidedrawer-link"
                     // ref={logoutRef}
-                    hidden={token ? false : true}>
-                    Log out
+                >
+                    Log {token ? 'out' : 'in'}
                 </div>
             </div>
         </Modal>
@@ -101,8 +106,14 @@ const mapStateToProps = ({
     modal: {
         sideDrawer: { show },
     },
+    auth: {
+        user: { token },
+    },
 }) => ({
     show,
+    token,
 });
 
-export default connect(mapStateToProps, { toggleModal })(SideDrawerModal);
+export default connect(mapStateToProps, { toggleModal, logOutUser })(
+    SideDrawerModal,
+);

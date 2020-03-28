@@ -12,6 +12,7 @@ import {
     Navigation,
     Property,
     SideDrawerModal,
+    LoadingModal,
 } from './';
 function App({ setLoggedInUser }) {
     useEffect(() => {
@@ -22,29 +23,29 @@ function App({ setLoggedInUser }) {
         <div className="App">
             <Navigation />
             <SideDrawerModal />
+            <LoadingModal />
             <div className="view">
                 <Switch>
-                    <Route path="/property" exact component={Listing} />
                     <Route path="/login" component={Login} />
                     <Route path="/register" component={Register} />
-                    {/* will have a separate router underneath of it */}
-                    <Route path="/property" exact>
-                        <div>Properties</div>
-                    </Route>
+                    <PrivateRoute path="/property" exact component={Listing} />
+                    />
                     <PrivateRoute
                         path="/property/new"
                         exact
                         component={AddListing}
                     />
-                    <Route
+                    <PrivateRoute
                         path="/property/:id"
                         component={Property}
-                        exact></Route>
+                        exact
+                    />
+                    {/* will have a separate router underneath of it */}
                     <PrivateRoute
                         path="/property/:id/edit"
                         component={UpdateListing}
                     />
-                    <Route render={() => <Redirect to="/login" />} />
+                    <Redirect to="/login" />
                 </Switch>
             </div>
         </div>

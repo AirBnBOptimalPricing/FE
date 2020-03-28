@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 // import {
 //     CardColumns,
 //     Card,
@@ -15,10 +15,12 @@ import { PropertyCard } from '../';
 import { getProperties } from '../../redux/actionCreators';
 
 const Listing = ({ list, status, getProperties }) => {
-    // useEffect(() => {
-    //     // requires fix from BE to stop using cookies
-    //     getProperties();
-    // }, []);
+    useEffect(() => {
+        //     // requires fix from BE to stop using cookies
+        getProperties();
+    }, []);
+
+    let [refresh, forceRefresh] = useState(0);
     // const history = useHistory();
 
     // const routeToListing = e => {
@@ -26,7 +28,11 @@ const Listing = ({ list, status, getProperties }) => {
     //     history.push(`/listing/${listing.id}`);
     // };
     const propertyCards = Object.values(list).map(property => (
-        <PropertyCard {...property} key={property.id} />
+        <PropertyCard
+            {...property}
+            key={property.id}
+            refresh={() => forceRefresh(refresh++)}
+        />
     ));
 
     return (

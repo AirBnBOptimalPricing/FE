@@ -4,11 +4,12 @@ import {
     REGISTER_SUCCESS,
     AUTH_FAILURE,
     SET_LOGGED_IN_USER,
+    LOG_OUT_USER,
 } from '../actions';
 import { decodeToken, withToken } from '../../util';
 
 const initialState = {
-    isLoading: null,
+    isLoading: false,
     status: null,
     error: {
         message: null,
@@ -18,7 +19,6 @@ const initialState = {
         token: null,
     },
 };
-
 export const auth = (state = initialState, action) => {
     const [localToken, setLocalToken] = withToken();
     switch (action.type) {
@@ -33,6 +33,7 @@ export const auth = (state = initialState, action) => {
             };
 
         case LOGIN_SUCCESS:
+            console.log(action.payload);
             const token = action.payload;
             const userInfo = token ? decodeToken(token) : { userId: null };
             setLocalToken('token', token);
@@ -74,7 +75,6 @@ export const auth = (state = initialState, action) => {
             const decodedToken = localToken
                 ? decodeToken(localToken)
                 : { userId: null };
-
             return {
                 ...state,
                 user: {
@@ -83,6 +83,20 @@ export const auth = (state = initialState, action) => {
                         ...state.user.loggedInAs,
                         id: decodedToken.userId,
                     },
+                },
+            };
+
+        case LOG_OUT_USER:
+            setLocalToken('token', '');
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    loggedInAs: {
+                        ...state.user.loggedInAs,
+                        id: null,
+                    },
+                    token: null,
                 },
             };
 

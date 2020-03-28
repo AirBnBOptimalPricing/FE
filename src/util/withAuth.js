@@ -2,7 +2,7 @@ import axios from 'axios';
 import { withToken } from './';
 
 export const withAuth = (url, method, data) => {
-    const token = withToken();
+    const [token] = withToken();
     return axios
         .create({
             headers: {

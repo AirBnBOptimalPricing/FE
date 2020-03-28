@@ -3,8 +3,11 @@ import { login, register } from './asyncAuth';
 import { addFail, addStart, addSuccess } from './addProperty';
 import { addProperty } from './asyncAdd';
 import { setLoggedInUser } from './setLoggedInUser';
-import { getProperties } from './getProperties';
+import { getProperties, getSingleProperty } from './getProperties';
 import { toggleModal } from './toggleModal';
+import { logOutUser } from './logOutUser';
+import { deleteProperty } from './deleteProperty';
+import { updateProperty } from './updateProperty';
 
 export {
     authStart,
@@ -20,4 +23,8 @@ export {
     setLoggedInUser,
     getProperties,
     toggleModal,
+    logOutUser,
+    getSingleProperty,
+    deleteProperty,
+    updateProperty,
 };

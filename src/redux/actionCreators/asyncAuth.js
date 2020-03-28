@@ -6,11 +6,11 @@ export const login = credentials => async dispatch => {
     try {
         const response = await withAuth('/auth/login/', 'post', credentials);
         const payload = response.data.token;
+        // on login fail/success this will happen because BE is issuing 203 on faliure
         dispatch(loginSuccess(payload));
         return { message: 'Logged in successfully' };
     } catch (error) {
-        console.log(error);
-        dispatch(authFailure(error));
+        dispatch(authFailure(error.response.data));
         return { error };
     }
 };
@@ -22,8 +22,7 @@ export const register = credentials => async dispatch => {
         dispatch(registerSuccess);
         return response;
     } catch (error) {
-        console.log(error);
-        dispatch(authFailure(error));
+        dispatch(authFailure(error.response.data));
         return { error };
     }
 };

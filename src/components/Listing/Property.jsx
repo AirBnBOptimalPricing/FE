@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { getSingleProperty } from '../../redux/actionCreators';
+import { getSingleProperty, deleteProperty } from '../../redux/actionCreators';
 
 const Property = ({
     className = '',
@@ -25,6 +25,7 @@ const Property = ({
         // amenities,
         price,
         owner,
+        deleteProperty,
     },
 }) => {
     // const {
@@ -48,6 +49,12 @@ const Property = ({
         getSingleProperty(id);
         // eslint-disable-next-line
     }, []);
+
+    const deletePropertyonClick = () => {
+        deleteProperty(id).then(() => {
+            history.push('/property');
+        });
+    };
     return (
         <div className={`${className} property listing`.trim()}>
             <img
@@ -91,7 +98,7 @@ const Property = ({
                     }}>
                     Edit
                 </div>
-                <div className="delete" onClick={e => e.stopPropagation()}>
+                <div className="delete" onClick={deletePropertyonClick}>
                     Delete
                 </div>
             </div>
@@ -109,4 +116,6 @@ const mapStateToProps = ({
     loggedInAs,
 });
 
-export default connect(mapStateToProps, { getSingleProperty })(Property);
+export default connect(mapStateToProps, { getSingleProperty, deleteProperty })(
+    Property,
+);

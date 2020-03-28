@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { useLocation, useHistory } from 'react-router-dom';
+import { deleteProperty } from '../../redux/actionCreators';
 
 const PropertyCard = ({
     className = '',
@@ -13,9 +14,19 @@ const PropertyCard = ({
     description,
     price,
     owner,
+    deleteProperty,
+    refresh,
 }) => {
     const location = useLocation();
     const history = useHistory();
+
+    const deletePropertyonClick = e => {
+        e.stopPropagation();
+        deleteProperty(id).then(() => {
+            history.push('/property');
+            refresh();
+        });
+    };
     return (
         <div
             onClick={e => {
@@ -50,9 +61,7 @@ const PropertyCard = ({
                             }}>
                             Edit
                         </div>
-                        <div
-                            className="delete"
-                            onClick={e => e.stopPropagation()}>
+                        <div className="delete" onClick={deletePropertyonClick}>
                             Delete
                         </div>
                     </div>
@@ -70,4 +79,4 @@ const mapStateToProps = ({
     return { loggedInAs: { ...loggedInAs } };
 };
 
-export default connect(mapStateToProps, {})(PropertyCard);
+export default connect(mapStateToProps, { deleteProperty })(PropertyCard);

@@ -19,7 +19,6 @@ const NavMenu = ({ logOutUser, token }) => {
         history.push('/login');
     };
 
-    console.log(token);
     return (
         <div className={`nav-menu`.trim()}>
             <Link

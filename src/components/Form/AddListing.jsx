@@ -93,17 +93,33 @@ const EnhancedAddForm = withFormik({
         canHaveChildren: Yup.boolean().oneOf([true, false]),
         propertyType: Yup.string().required(), // what kind of property types are there? commerical/residential
         floors: Yup.string(),
-        beds: Yup.string(),
-        baths: Yup.string(),
+        beds: Yup.number(),
+        baths: Yup.number(),
         amenities: Yup.string().required(),
-        price: Yup.string().required(),
+        price: Yup.number().required(),
     }),
     handleSubmit: (
-        values,
-        { props: { addProperty }, history: { push }, resetForm },
+        {
+            canHaveChildren: children_allowed,
+            beds: bedrooms_number,
+            baths: bathrooms_number,
+            propertyType: property_type,
+            floors,
+            ...values
+        },
+        { props: { addProperty }, history, resetForm },
     ) => {
-        addProperty({ ...values }).then(() => {
+        const property = {
+            ...values,
+            zip: Number.parseInt(values.zip),
+            children_allowed,
+            bathrooms_number,
+            bedrooms_number,
+            property_type,
+        };
+        addProperty(property).then(id => {
             // on success
+            console.log('success?');
             resetForm({
                 address: '',
                 city: '',
@@ -118,6 +134,11 @@ const EnhancedAddForm = withFormik({
                 amenities: '',
                 price: '',
             });
+
+            history.push(`/property/${id}`);
+        });
+        console.log().catch(err => {
+            console.log('error happened', err.config, err.response);
         });
     },
 })(AddForm);

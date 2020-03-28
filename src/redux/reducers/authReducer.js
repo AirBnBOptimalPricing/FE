@@ -19,7 +19,6 @@ const initialState = {
         token: null,
     },
 };
-
 export const auth = (state = initialState, action) => {
     const [localToken, setLocalToken] = withToken();
     switch (action.type) {
@@ -82,10 +81,7 @@ export const auth = (state = initialState, action) => {
                     ...state.user,
                     loggedInAs: {
                         ...state.user.loggedInAs,
-                        id:
-                            typeof decodeToken.userId === 'undefined'
-                                ? null
-                                : decodedToken.userId,
+                        id: decodedToken.userId,
                     },
                 },
             };

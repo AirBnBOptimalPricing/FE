@@ -6,6 +6,8 @@ import {
     GET_SINGLE_PROPERTY_SUCCESS,
 } from '../actions';
 
+import { setLoggedInUser } from './';
+
 const getStart = () => {
     return {
         type: GET_PROPERTY_START,
@@ -32,6 +34,8 @@ export const getProperties = () => async dispatch => {
     try {
         const response = await withAuth('/user', 'get');
         dispatch(getSuccess(response.data));
+        dispatch(setLoggedInUser());
+
         return;
     } catch (error) {
         dispatch(getFail(error.response.data));
@@ -43,6 +47,7 @@ export const getSingleProperty = id => async dispatch => {
     try {
         const response = await withAuth(`/user/${id}`, 'get');
         dispatch(getSinglePropertySuccess(response.data));
+        dispatch(setLoggedInUser());
         return;
     } catch (error) {
         dispatch(getFail(error.response.data));

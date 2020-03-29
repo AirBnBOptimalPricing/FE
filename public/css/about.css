@@ -1,6 +1,27 @@
 body {
     background-color: gray;
 }
+nav {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+    writing-mode: vertical-rl;
+    margin-left: 95%;
+}
+a {
+    display: flex;
+    text-decoration: none;
+    padding-top: 3%;
+    /* padding-right: 5%; */
+    color: #FF0200;
+    font-size: 1em; 
+    font-family: 'Impact';
+    /* text-align: right; */
+    /* padding-left: 100%; */
+    /*margin-bottom: -5em;
+    margin-top: 4em; */    
+}
 h1 {
     text-align: center;
 }

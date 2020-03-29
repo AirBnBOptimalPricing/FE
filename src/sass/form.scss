@@ -47,6 +47,9 @@
 
     select.ds-input {
         width: 70%;
+        @media (min-width: $medium) {
+            width: 65%;
+        }
     }
 
     @media (min-width: $medium) {

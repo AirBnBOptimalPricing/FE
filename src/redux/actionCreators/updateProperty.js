@@ -37,7 +37,6 @@ export const updateProperty = (id, changes) => async dispatch => {
         dispatch(updateSuccess(property));
         return response;
     } catch (error) {
-        console.log(error);
         dispatch(updateFail(error.response));
     }
 };

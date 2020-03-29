@@ -42,6 +42,7 @@ const SideDrawerModal = ({ show, toggleModal, token, logOutUser }) => {
         e.preventDefault();
         e.stopPropagation();
         logOutUser();
+        toggleModal('sideDrawer');
         history.push('/login');
     };
     return (

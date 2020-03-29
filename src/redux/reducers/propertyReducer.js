@@ -12,6 +12,9 @@ import {
     DELETE_PROPERTY_START,
     DELETE_PROPERTY_SUCCESS,
     GET_SINGLE_PROPERTY_SUCCESS,
+    GET_SUGGESTED_PRICE_START,
+    GET_SUGGESTED_PRICE_SUCCESS,
+    GET_SUGGESTED_PRICE_FAILURE,
 } from '../actions';
 
 import { mapObject, removeObjectFromMap } from '../../util';
@@ -32,7 +35,11 @@ const initialState = {
         bathrooms_number: 0,
         amenities: '',
         price: Number.parseFloat(0),
-        owner: {},
+        user_id: {},
+    },
+    suggestedPrice: {
+        amount: '',
+        errors: '',
     },
 
     status: {
@@ -150,7 +157,7 @@ export const property = (state = { ...initialState }, action) => {
             };
         case UPDATE_PROPERTY_SUCCESS:
             // payload is updated object with id
-            let { id } = JSON.parse(action.payload);
+            let { id } = action.payload;
             console.log(action.payload);
             const property = { ...state.list[id], ...action.payload };
             return {
@@ -213,6 +220,34 @@ export const property = (state = { ...initialState }, action) => {
                     },
                 },
             };
+
+        case GET_SUGGESTED_PRICE_START:
+            return {
+                ...state,
+                suggestedPrice: {
+                    amount: '',
+                    errors: '',
+                },
+            };
+
+        case GET_SUGGESTED_PRICE_SUCCESS:
+            return {
+                ...state,
+                suggestedPrice: {
+                    ...state.suggestedPrice,
+                    amount: action.payload,
+                },
+            };
+
+        case GET_SUGGESTED_PRICE_FAILURE:
+            return {
+                ...state,
+                suggestedPrice: {
+                    ...state.suggestedPrice,
+                    errors: action.payload,
+                },
+            };
+
         default:
             return { ...state };
     }

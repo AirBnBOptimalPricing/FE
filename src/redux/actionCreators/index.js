@@ -8,6 +8,7 @@ import { toggleModal } from './toggleModal';
 import { logOutUser } from './logOutUser';
 import { deleteProperty } from './deleteProperty';
 import { updateProperty } from './updateProperty';
+import { getSuggestedPrice } from './getSuggestedPrice';
 
 export {
     authStart,
@@ -27,4 +28,5 @@ export {
     getSingleProperty,
     deleteProperty,
     updateProperty,
+    getSuggestedPrice,
 };

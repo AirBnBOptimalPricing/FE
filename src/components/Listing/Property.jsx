@@ -24,7 +24,7 @@ const Property = ({
         baths,
         // amenities,
         price,
-        owner,
+        user_id: owner,
         deleteProperty,
     },
 }) => {
@@ -88,20 +88,21 @@ const Property = ({
                     <p>{floors}</p>
                 </div>
             </section>
-            {/* {owner === loggedInAs.id &&  */}
-            <div className="property-controls">
-                <div
-                    className="edit"
-                    onClick={e => {
-                        e.stopPropagation();
-                        history.push(`/property/${id}/edit`);
-                    }}>
-                    Edit
+            {owner === loggedInAs.id && (
+                <div className="property-controls">
+                    <div
+                        className="edit"
+                        onClick={e => {
+                            e.stopPropagation();
+                            history.push(`/property/${id}/edit`);
+                        }}>
+                        Edit
+                    </div>
+                    <div className="delete" onClick={deletePropertyonClick}>
+                        Delete
+                    </div>
                 </div>
-                <div className="delete" onClick={deletePropertyonClick}>
-                    Delete
-                </div>
-            </div>
+            )}
         </div>
     );
 };

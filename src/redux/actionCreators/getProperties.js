@@ -42,11 +42,9 @@ export const getSingleProperty = id => async dispatch => {
     dispatch(getStart());
     try {
         const response = await withAuth(`/user/${id}`, 'get');
-        console.log(response);
         dispatch(getSinglePropertySuccess(response.data));
         return;
     } catch (error) {
-        console.log(error);
         dispatch(getFail(error.response.data));
     }
 };

@@ -12,6 +12,9 @@ import {
     DELETE_PROPERTY_START,
     DELETE_PROPERTY_SUCCESS,
     GET_SINGLE_PROPERTY_SUCCESS,
+    GET_SUGGESTED_PRICE_START,
+    GET_SUGGESTED_PRICE_SUCCESS,
+    GET_SUGGESTED_PRICE_FAILURE,
 } from '../actions';
 
 import { mapObject, removeObjectFromMap } from '../../util';
@@ -33,6 +36,10 @@ const initialState = {
         amenities: '',
         price: Number.parseFloat(0),
         owner: {},
+    },
+    suggestedPrice: {
+        amount: '',
+        errors: '',
     },
 
     status: {
@@ -213,6 +220,34 @@ export const property = (state = { ...initialState }, action) => {
                     },
                 },
             };
+
+        case GET_SUGGESTED_PRICE_START:
+            return {
+                ...state,
+                suggestedPrice: {
+                    amount: '',
+                    errors: '',
+                },
+            };
+
+        case GET_SUGGESTED_PRICE_SUCCESS:
+            return {
+                ...state,
+                suggestedPrice: {
+                    ...state.suggestedPrice,
+                    amount: action.payload,
+                },
+            };
+
+        case GET_SUGGESTED_PRICE_FAILURE:
+            return {
+                ...state,
+                suggestedPrice: {
+                    ...state.suggestedPrice,
+                    errors: action.payload,
+                },
+            };
+
         default:
             return { ...state };
     }

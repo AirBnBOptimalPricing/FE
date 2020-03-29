@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Form, withFormik } from 'formik';
 import * as Yup from 'yup';
 import { useOptions } from '../../hooks';
@@ -6,10 +6,53 @@ import { Input } from '../';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
-import { updateProperty } from '../../redux/actionCreators';
+import { updateProperty, getSuggestedPrice } from '../../redux/actionCreators';
+import { formatMoney } from '../../util';
 
-const UpdateForm = ({ errors, touched, initialValues, values, ...props }) => {
-    const [floors, bedsAndBaths] = useOptions([{ amount: 5 }, { amount: 7 }]);
+const UpdateForm = ({
+    errors,
+    touched,
+    initialValues,
+    values: { neighborhoodGroup: neighbourhood_group, propertyType: room_type },
+    amount,
+    ...props
+}) => {
+    const [floors, bedsAndBaths, propertyType, neighborhoodGroup] = useOptions([
+        { amount: 5 },
+        { amount: 7 },
+        {
+            data: {
+                1: 'Apartment Unit / House',
+                2: 'Private Room',
+                3: 'Shared room',
+            },
+        },
+        {
+            data: {
+                1: 'Mitte',
+                2: 'Pankow',
+                3: 'Tempelhof - Schöneberg',
+                4: 'Friedrichshain-Kreuzberg',
+                5: 'Neukölln',
+                6: 'Charlottenburg-Wilm.',
+                7: 'Treptow - Köpenick',
+                8: 'Steglitz - Zehlendorf',
+                9: 'Reinickendorf',
+                10: 'Lichtenberg',
+                11: 'Marzahn - Hellersdorf',
+                12: 'Spandau',
+            },
+        },
+    ]);
+
+    useEffect(() => {
+        // send a req to https://dspt3airbnb.herokuapp.com/predict
+        //  if both pieces of information is available
+        if (room_type && neighbourhood_group) {
+            getSuggestedPrice({ room_type, neighbourhood_group });
+        }
+        // eslint-disable-next-line
+    }, [room_type, neighbourhood_group]);
 
     return (
         <div className="form">
@@ -27,7 +70,18 @@ const UpdateForm = ({ errors, touched, initialValues, values, ...props }) => {
                     name="propertyType"
                     id="property-type"
                     altText="Property Type"
-                />
+                    inputClassName="ds-input"
+                    as="select">
+                    {propertyType}
+                </Input>
+                <Input
+                    name="neighborhoodGroup"
+                    id="neighborhood-group"
+                    altText="Neighborhood"
+                    inputClassName="ds-input"
+                    as="select">
+                    {neighborhoodGroup}
+                </Input>
                 <Input name="floors" as="select" id="floors">
                     {floors}
                 </Input>
@@ -39,6 +93,12 @@ const UpdateForm = ({ errors, touched, initialValues, values, ...props }) => {
                 </Input>
                 <Input name="amenities" id="amenities" />
                 <Input name="price" id="price" />
+                {amount && (
+                    <div className="suggested-price-field">
+                        <p>Suggested price: </p>
+                        <p>&euro;{formatMoney(amount)}</p>
+                    </div>
+                )}
                 <Input
                     name="canHaveChildren"
                     type="checkbox"
@@ -123,12 +183,16 @@ const EnhancedUpdateForm = compose(
                 bedrooms_number,
                 property_type,
             };
-            console.log('submitted');
-            updateProperty(id, values).then(() => history.push('/property/'));
+            updateProperty(id, property).then(() => history.push('/property/'));
         },
     }),
 )(UpdateForm);
 
-const mapStateToProps = ({ property: { list } }) => ({ list });
+const mapStateToProps = ({
+    property: {
+        list,
+        suggestedPrice: { amount },
+    },
+}) => ({ list, amount });
 
 export default connect(mapStateToProps, { updateProperty })(EnhancedUpdateForm);

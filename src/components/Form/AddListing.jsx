@@ -95,7 +95,7 @@ const AddForm = ({
                 {amount && (
                     <div className="suggested-price-field">
                         <p>Suggested price: </p>
-                        <p>${formatMoney(amount)}</p>
+                        <p>&euro;{formatMoney(amount)}</p>
                     </div>
                 )}
 
@@ -130,7 +130,7 @@ const EnhancedAddForm = compose(
             baths = 1,
             amenities = '',
             amount,
-            price,
+            price = 0,
         }) => {
             return {
                 address,

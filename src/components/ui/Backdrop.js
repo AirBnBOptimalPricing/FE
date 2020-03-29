@@ -4,7 +4,9 @@ import { toggleModal } from '../../redux/actionCreators';
 
 const Backdrop = ({ modalName, toggleModal, authLoading, propertyLoading }) => {
     const clickHandler = () => {
-        return authLoading || propertyLoading ? null : toggleModal(modalName);
+        return authLoading || propertyLoading || !modalName
+            ? null
+            : toggleModal(modalName);
     };
 
     return <div className="backdrop" onClick={clickHandler}></div>;

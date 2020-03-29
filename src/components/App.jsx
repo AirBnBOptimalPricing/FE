@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { setLoggedInUser } from '../redux/actionCreators';
 import {
     AddListing,
     PrivateRoute,
@@ -15,10 +14,6 @@ import {
     LoadingModal,
 } from './';
 function App({ setLoggedInUser }) {
-    useEffect(() => {
-        setLoggedInUser();
-        // eslint-disable-next-line
-    }, []);
     return (
         <div className="App">
             <Navigation />
@@ -52,4 +47,4 @@ function App({ setLoggedInUser }) {
     );
 }
 
-export default connect(null, { setLoggedInUser })(App);
+export default connect(null, {})(App);

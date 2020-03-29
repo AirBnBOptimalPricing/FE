@@ -16,7 +16,7 @@ import { getProperties } from '../../redux/actionCreators';
 
 const Listing = ({ list, status, getProperties }) => {
     useEffect(() => {
-        //     // requires fix from BE to stop using cookies
+        //     // requires fix frgetPropertiesom BE to stop using cookies
         getProperties();
         // eslint-disable-next-line
     }, []);

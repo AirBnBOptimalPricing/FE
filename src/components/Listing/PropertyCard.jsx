@@ -13,7 +13,7 @@ const PropertyCard = ({
     city,
     description,
     price,
-    owner,
+    user_id: owner,
     deleteProperty,
     refresh,
 }) => {
@@ -48,10 +48,9 @@ const PropertyCard = ({
                         <p>Price: {`$${price}`}</p>
                     </div>
                 </section>
-                {
-                    // conditionally render only if the owner is looking at them
-                    // commented due to the way BE made the property model without an owner property
-                    // owner === loggedInAs.id &&
+                {// conditionally render only if the owner is looking at them
+                // commented due to the way BE made the property model without an owner property
+                owner === loggedInAs.id && (
                     <div className="property-controls">
                         <div
                             className="edit"
@@ -65,7 +64,7 @@ const PropertyCard = ({
                             Delete
                         </div>
                     </div>
-                }
+                )}
             </div>
         </div>
     );

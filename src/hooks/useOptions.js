@@ -15,23 +15,31 @@ export const useOptions = (options = []) => {
      *
      */
 
-    const createOption = value => {
+    const createOption = (value, displayValue = '') => {
         const key = (Math.random() * Math.random()).toString(16).substr(2, 9);
         return (
             <option value={value} key={key}>
-                {value}
+                {displayValue ? displayValue : value}
             </option>
         );
     };
 
     const iterateOverOptions = () => {
-        const optionResult = options.map(({ amount, valueStart = 1 }) => {
-            return Array(amount)
-                .fill(0)
-                .map((_, index) => {
-                    return createOption(valueStart + index);
-                });
-        });
+        const optionResult = options.map(
+            ({ amount = 0, valueStart = 1, data }) => {
+                if (!amount) {
+                    return Object.entries(data).map(([key, value]) => {
+                        return createOption(key, value);
+                    });
+                }
+
+                return Array(amount)
+                    .fill(0)
+                    .map((_, index) => {
+                        return createOption(valueStart + index);
+                    });
+            },
+        );
 
         return optionResult;
     };

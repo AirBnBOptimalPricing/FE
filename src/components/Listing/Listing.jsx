@@ -18,6 +18,7 @@ const Listing = ({ list, status, getProperties }) => {
     useEffect(() => {
         //     // requires fix from BE to stop using cookies
         getProperties();
+        // eslint-disable-next-line
     }, []);
 
     let [refresh, forceRefresh] = useState(0);

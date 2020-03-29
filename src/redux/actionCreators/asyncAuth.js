@@ -19,7 +19,7 @@ export const register = credentials => async dispatch => {
     dispatch(authStart());
     try {
         const response = await withAuth('/auth/register/', 'post', credentials);
-        dispatch(registerSuccess);
+        dispatch(registerSuccess());
         return response;
     } catch (error) {
         dispatch(authFailure(error.response.data));

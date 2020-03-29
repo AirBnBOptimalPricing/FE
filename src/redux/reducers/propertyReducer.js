@@ -35,7 +35,7 @@ const initialState = {
         bathrooms_number: 0,
         amenities: '',
         price: Number.parseFloat(0),
-        owner: {},
+        user_id: {},
     },
     suggestedPrice: {
         amount: '',
@@ -157,7 +157,7 @@ export const property = (state = { ...initialState }, action) => {
             };
         case UPDATE_PROPERTY_SUCCESS:
             // payload is updated object with id
-            let { id } = JSON.parse(action.payload);
+            let { id } = action.payload;
             console.log(action.payload);
             const property = { ...state.list[id], ...action.payload };
             return {

@@ -35,6 +35,14 @@
             transform: scale(1.025);
             transition: all 0.25s;
         }
+
+        @media (min-width: 1500px) {
+            width: 80%;
+        }
+
+        @media (min-width: 1600px) {
+            width: 60%;
+        }
     }
 
     &-info > header > h4,

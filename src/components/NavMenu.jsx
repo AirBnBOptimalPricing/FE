@@ -23,7 +23,7 @@ const NavMenu = ({ logOutUser, token }) => {
         <div className={`nav-menu`.trim()}>
             <Link
                 className="nav-menu-link"
-                to="/property"
+                to="/"
                 //ref={homeRef}
             >
                 Home

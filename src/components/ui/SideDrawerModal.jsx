@@ -52,7 +52,7 @@ const SideDrawerModal = ({ show, toggleModal, token, logOutUser }) => {
             <div
                 className={`sidedrawer-container ${show ? 'show' : ''}`.trim()}>
                 <Link
-                    to="/property"
+                    to="/"
                     onClick={handleClick}
                     className="sidedrawer-link"
                     //ref={homeRef}

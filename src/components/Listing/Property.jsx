@@ -58,7 +58,7 @@ const Property = ({
     return (
         <div className={`${className} property listing`.trim()}>
             <img
-                src="https://images.unsplash.com/photo-1559767949-0faa5c7e9992?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
+                src="https://images.unsplash.com/photo-1538685634737-24b83e3fa2f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80"
                 alt="placeholder"
             />
             <h2 className="price">&euro;{price}</h2>

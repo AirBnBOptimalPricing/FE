@@ -13,6 +13,7 @@ import {
     SideDrawerModal,
     LoadingModal,
     Footer,
+    Home,
 } from './';
 function App({ setLoggedInUser }) {
     return (
@@ -22,6 +23,7 @@ function App({ setLoggedInUser }) {
             <LoadingModal />
             <div className="view">
                 <Switch>
+                    <Route exact path="/" component={Home} />
                     <Route path="/login" component={Login} />
                     <Route path="/register" component={Register} />
                     <PrivateRoute path="/property" exact component={Listing} />

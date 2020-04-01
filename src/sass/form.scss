@@ -28,11 +28,29 @@
         font-weight: 600;
         padding: 7px 15px;
     }
+
+    @media (min-width: $medium) {
+        .box{
+            width: 100%;
+            display: flex;
+            flex-direction:row ;
+            padding: 0 3%;
+
+            .address{
+                width: 100%;
+                flex-direction: row;
+            }
+        }
+        .suggest-dropdowns{
+            display: flex;
+            flex-direction: row;
+        }
+    }
 }
 .dropdowns{
     display: flex;
     flex-direction: row; 
-    //justify-content: space-between;
+    justify-content: space-between;
 }
 form{
     margin-left: 15%;
@@ -84,7 +102,7 @@ form{
         color:green;
         padding: 0 1%;
         width: 75%;
-        justify-content: space-between;
+        // justify-content: space-between;
         // margin-left: auto;
         display: flex;
         transform: translateY(-10px);
@@ -96,4 +114,5 @@ form{
             margin-bottom: 20px;
         }
     }
+   
 }

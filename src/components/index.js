@@ -13,6 +13,7 @@ import Footer from './Footer';
 import { Property, PropertyCard, Listing, ListingPage } from './Listing/';
 import { Modal, Backdrop, SideDrawerModal, Loader, LoadingModal } from './ui/';
 import NavMenu from './NavMenu';
+import Home from './Home'
 
 export {
     App,
@@ -35,4 +36,5 @@ export {
     Loader,
     LoadingModal,
     Footer,
+    Home,
 };

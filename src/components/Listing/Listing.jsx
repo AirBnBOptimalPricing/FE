@@ -22,6 +22,7 @@ const Listing = ({ list, status, getProperties }) => {
 
     return (
         <div>
+           <h3 className="form-header">Stays in Berlin</h3>
             {propertyCards}
             <div className="cards-wrapper">
             </div>

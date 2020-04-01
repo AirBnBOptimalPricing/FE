@@ -12,6 +12,10 @@ const PropertyCard = ({
     zip,
     city,
     description,
+    propertyType,
+    floors,
+    beds,
+    baths,
     price,
     user_id: owner,
     deleteProperty,
@@ -45,6 +49,7 @@ const PropertyCard = ({
                 <section>
                     <div>
                         <p>{description}</p>
+                        {/* <p>{`A ${floors} ${propertyType} with ${beds} and ${baths}`}</p> // returns undefined */}
                         <p>Price: {`$${price}`}</p>
                     </div>
                 </section>

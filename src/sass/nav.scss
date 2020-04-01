@@ -1,7 +1,7 @@
 .nav {
     font-size: 1.45rem;
     padding: 0 4%;
-    background-color: $orange;
+    background-image: linear-gradient(-60deg, #16a085 0%, #f4d03f 100%);
     position: fixed;
     z-index: 4000;
     width: 100vw;
@@ -24,11 +24,11 @@
         padding: 6px 5px;
         margin: 15px 0;
         border-radius: 5px;
-        box-shadow: 2px 2px 2px darken($color: $orange, $amount: 25);
+        //box-shadow: 2px 2px 2px darken($color: $orange, $amount: 25);
         display: flex;
         flex-flow: column;
         justify-content: space-between;
-        background: darken($color: $orange, $amount: 15);
+       // background: darken($color: $orange, $amount: 15);
 
         &:active {
             box-shadow: 2px 2px 2px darken($color: $orange, $amount: 25) inset;
@@ -82,4 +82,14 @@
             display: flex;
         }
     }
+}
+.ui.inverted.segment{
+    background-image: linear-gradient(-60deg, #16a085 0%, #f4d03f 100%);
+   a{
+    font-size: 20px;
+    color:white
+   }
+}
+.ui.divided.inverted.list>.item{
+    font-size: 20px;
 }

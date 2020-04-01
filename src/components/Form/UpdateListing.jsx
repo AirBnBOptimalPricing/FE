@@ -82,15 +82,18 @@ const UpdateForm = ({
                     as="select">
                     {neighborhoodGroup}
                 </Input>
-                <Input name="floors" as="select" id="floors">
-                    {floors}
-                </Input>
-                <Input name="beds" as="select" id="beds">
-                    {bedsAndBaths}
-                </Input>
-                <Input name="baths" as="select" id="baths">
-                    {bedsAndBaths}
-                </Input>
+                <div className="dropdowns">
+                    <Input name="floors" as="select" id="floors">
+                        {floors}
+                    </Input>
+                    <Input name="beds" as="select" id="beds">
+                        {bedsAndBaths}
+                    </Input>
+                    <Input name="baths" as="select" id="baths">
+                        {bedsAndBaths}
+                    </Input>
+                </div>
+                
                 <Input name="amenities" id="amenities" />
                 <Input name="price" id="price" />
                 {amount && (

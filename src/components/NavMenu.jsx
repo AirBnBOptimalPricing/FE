@@ -28,13 +28,12 @@ const NavMenu = ({ logOutUser, token }) => {
             >
                 Home
             </Link>
-            <Link
+            <a
                 className="nav-menu-link"
-                to="/property"
-                // ref={aboutRef}
+                href="https://hopeful-villani-9f2312.netlify.com/about"  
             >
                 About
-            </Link>
+            </a>
             <Link
                 to="/property"
                 className="nav-menu-link"

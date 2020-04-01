@@ -1,24 +1,26 @@
 import {
     AUTH_START,
-    AUTH_SUCCESS,
+    LOGIN_SUCCESS,
+    REGISTER_SUCCESS,
     AUTH_FAILURE,
     SET_LOGGED_IN_USER,
+    LOG_OUT_USER,
 } from '../actions';
-import { decodeToken } from '../../util';
+import { decodeToken, withToken } from '../../util';
 
 const initialState = {
-    isLoading: null,
+    isLoading: false,
     status: null,
     error: {
         message: null,
     },
     user: {
-        loggedInAs: null,
+        loggedInAs: { id: null },
         token: null,
     },
 };
-
 export const auth = (state = initialState, action) => {
+    const [localToken, setLocalToken] = withToken();
     switch (action.type) {
         case AUTH_START:
             return {
@@ -30,22 +32,27 @@ export const auth = (state = initialState, action) => {
                 },
             };
 
-        case AUTH_SUCCESS:
-            let {
-                payload: { token },
-            } = action;
-            const id = token ? decodeToken(token) : null;
-            localStorage.setItem('token', token);
+        case LOGIN_SUCCESS:
+            console.log(action.payload);
+            const token = action.payload;
+            const userInfo = token ? decodeToken(token) : { userId: null };
+            setLocalToken('token', token);
             return {
                 ...state,
                 isLoading: false,
                 user: {
                     ...state.user,
                     loggedInAs: {
-                        id,
+                        id: userInfo.userId,
                     },
                     token,
                 },
+            };
+
+        case REGISTER_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
             };
         case AUTH_FAILURE:
             return {
@@ -58,16 +65,38 @@ export const auth = (state = initialState, action) => {
                 },
             };
         case SET_LOGGED_IN_USER:
-            const localToken = localStorage.getItem('token');
-            const user = localToken ? decodeToken(localToken) : null;
+            // userInfo should resemble
+            /**
+             * {
+             *  userId,
+             * ...
+             * }
+             */
+            const decodedToken = localToken
+                ? decodeToken(localToken)
+                : { userId: null };
             return {
                 ...state,
                 user: {
                     ...state.user,
                     loggedInAs: {
                         ...state.user.loggedInAs,
-                        id: user,
+                        id: decodedToken.userId,
                     },
+                },
+            };
+
+        case LOG_OUT_USER:
+            setLocalToken('token', '');
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    loggedInAs: {
+                        ...state.user.loggedInAs,
+                        id: null,
+                    },
+                    token: null,
                 },
             };
 

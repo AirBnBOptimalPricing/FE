@@ -11,80 +11,35 @@ import {
     DELETE_PROPERTY_FAILURE,
     DELETE_PROPERTY_START,
     DELETE_PROPERTY_SUCCESS,
+    GET_SINGLE_PROPERTY_SUCCESS,
+    GET_SUGGESTED_PRICE_START,
+    GET_SUGGESTED_PRICE_SUCCESS,
+    GET_SUGGESTED_PRICE_FAILURE,
 } from '../actions';
 
-import { mapObject, insertObjectToMap, removeObjectFromMap } from '../../util';
+import { mapObject, removeObjectFromMap } from '../../util';
 
 const initialState = {
-    list: {
-        1: {
-            id: 1,
-            address: '1234 rainbow street n',
-            city: 'Hollywood',
-            state: 'ca',
-            zip: '90210',
-            description:
-                'Premium apartment unit, 3 bed/bath, spacious, room service',
-            canHaveChildren: false,
-            propertyType: 'apartment',
-            floors: 2,
-            beds: 3,
-            baths: 3,
-            amenities: null,
-            price: 5000,
-            owner: 3,
-        },
-        2: {
-            id: 2,
-            address: '1234 rainbow street n',
-            city: 'Hollywood',
-            state: 'ca',
-            zip: '90210',
-            description:
-                'Premium apartment unit, 3 bed/bath, spacious, room service',
-            canHaveChildren: false,
-            propertyType: 'apartment',
-            floors: 2,
-            beds: 3,
-            baths: 3,
-            amenities: null,
-            price: 5000,
-            owner: 4,
-        },
-        3: {
-            id: 3,
-            address: '1234 rainbow street n',
-            city: 'Hollywood',
-            state: 'ca',
-            zip: '90210',
-            description:
-                'Premium apartment unit, 3 bed/bath, spacious, room service',
-            canHaveChildren: false,
-            propertyType: 'apartment',
-            floors: 2,
-            beds: 3,
-            baths: 3,
-            amenities: null,
-            price: 5000,
-            owner: 2,
-        },
-        4: {
-            id: 4,
-            address: '1234 rainbow street n',
-            city: 'Hollywood',
-            state: 'ca',
-            zip: '90210',
-            description:
-                'Premium apartment unit, 3 bed/bath, spacious, room service',
-            canHaveChildren: false,
-            propertyType: 'apartment',
-            floors: 2,
-            beds: 3,
-            baths: 3,
-            amenities: null,
-            price: 5000,
-            owner: 4,
-        },
+    list: {},
+    active: {
+        id: 0,
+        address: '',
+        city: '',
+        state: '',
+        zip: Number.parseInt('00000'),
+        description: '',
+        children_allowed: false,
+        property_type: '',
+        floors: 0,
+        bedrooms_number: 0,
+        bathrooms_number: 0,
+        amenities: '',
+        price: Number.parseFloat(0),
+        user_id: {},
+    },
+    suggestedPrice: {
+        amount: '',
+        errors: '',
     },
 
     status: {
@@ -110,9 +65,7 @@ export const property = (state = { ...initialState }, action) => {
                 },
             };
         case GET_PROPERTY_SUCCESS:
-            console.log('hello');
             const fetchedMappedPropertyList = mapObject(action.payload);
-            console.log(fetchedMappedPropertyList);
             return {
                 ...state,
                 list: { ...fetchedMappedPropertyList },
@@ -121,15 +74,30 @@ export const property = (state = { ...initialState }, action) => {
                     isLoading: false,
                 },
             };
+
+        case GET_SINGLE_PROPERTY_SUCCESS: {
+            const property = action.payload;
+            return {
+                ...state,
+                status: {
+                    ...state.status,
+                    isLoading: false,
+                },
+                active: {
+                    ...property,
+                },
+            };
+        }
+
         case GET_PROPERTY_FAILURE:
             return {
                 ...state,
                 list: {},
                 status: {
-                    ...state,
+                    ...state.status,
                     isLoading: false,
                     errors: {
-                        ...state.errors,
+                        ...state.status.errors,
                         message: action.payload.message,
                     },
                 },
@@ -148,13 +116,16 @@ export const property = (state = { ...initialState }, action) => {
             };
         case CREATE_PROPERTY_SUCCESS:
             // add to list by reconverting list back to array and subjecting to mapObject
-            const newlyCreatedPropertyList = insertObjectToMap(
-                action.payload,
-                state.list,
-            );
+            // issue -> action.payload => id of newly created object
+            // solution, query /user/:id
+            // solution won't work due to async nature and synchronous nature of redux
+            // const newlyCreatedPropertyList = insertObjectToMap(
+            //     action.payload,
+            //     state.list,
+            // );
             return {
                 ...state,
-                list: { ...newlyCreatedPropertyList },
+                // list: { ...newlyCreatedPropertyList },
                 status: {
                     isLoading: false,
                 },
@@ -166,7 +137,7 @@ export const property = (state = { ...initialState }, action) => {
                     ...state.status,
                     isLoading: false,
                     errors: {
-                        ...state.errors,
+                        ...state.status.errors,
                         message: action.payload.message,
                     },
                 },
@@ -187,6 +158,7 @@ export const property = (state = { ...initialState }, action) => {
         case UPDATE_PROPERTY_SUCCESS:
             // payload is updated object with id
             let { id } = action.payload;
+            console.log(action.payload);
             const property = { ...state.list[id], ...action.payload };
             return {
                 ...state,
@@ -204,10 +176,10 @@ export const property = (state = { ...initialState }, action) => {
                 ...state,
                 status: {
                     ...state.status,
-                    isLoading: true,
+                    isLoading: false,
                     errors: {
-                        ...state.errors,
-                        message: action.payload.message,
+                        ...state.status.errors,
+                        message: action.payload,
                     },
                 },
             };
@@ -226,7 +198,7 @@ export const property = (state = { ...initialState }, action) => {
             };
         case DELETE_PROPERTY_SUCCESS:
             // this is where we remove said object, we are given an id
-            const { id: propertyIdToDelete } = action.payload;
+            const propertyIdToDelete = action.payload;
             const listWithoutId = removeObjectFromMap(
                 propertyIdToDelete,
                 state.list,
@@ -241,13 +213,41 @@ export const property = (state = { ...initialState }, action) => {
                 ...state,
                 status: {
                     ...state.status,
-                    isLoading: true,
+                    isLoading: false,
                     errors: {
-                        ...state.errors,
-                        message: action.payload.message,
+                        ...state.status.errors,
+                        message: action.payload,
                     },
                 },
             };
+
+        case GET_SUGGESTED_PRICE_START:
+            return {
+                ...state,
+                suggestedPrice: {
+                    amount: '',
+                    errors: '',
+                },
+            };
+
+        case GET_SUGGESTED_PRICE_SUCCESS:
+            return {
+                ...state,
+                suggestedPrice: {
+                    ...state.suggestedPrice,
+                    amount: action.payload,
+                },
+            };
+
+        case GET_SUGGESTED_PRICE_FAILURE:
+            return {
+                ...state,
+                suggestedPrice: {
+                    ...state.suggestedPrice,
+                    errors: action.payload,
+                },
+            };
+
         default:
             return { ...state };
     }

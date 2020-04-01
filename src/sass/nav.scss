@@ -1,15 +1,17 @@
 .nav {
     font-size: 1.45rem;
-    padding: 15px 4%;
-    background-color: $orange;
+    padding: 0 4%;
+    background-image: linear-gradient(-60deg, #16a085 0%, #f4d03f 100%);
     position: fixed;
-    z-index: 50;
+    z-index: 4000;
     width: 100vw;
     top: 0;
     display: flex;
     justify-content: space-between;
     box-shadow: 0 2px 4px gray;
     &-brand {
+        display: block;
+        padding: 15px 0;
         width: 60px;
         line-height: 13px;
         letter-spacing: 0.1rem;
@@ -20,12 +22,13 @@
 
     &-sidedrawer.button {
         padding: 6px 5px;
+        margin: 15px 0;
         border-radius: 5px;
-        box-shadow: 2px 2px 2px darken($color: $orange, $amount: 25);
+        //box-shadow: 2px 2px 2px darken($color: $orange, $amount: 25);
         display: flex;
         flex-flow: column;
         justify-content: space-between;
-        background: darken($color: $orange, $amount: 15);
+       // background: darken($color: $orange, $amount: 15);
 
         &:active {
             box-shadow: 2px 2px 2px darken($color: $orange, $amount: 25) inset;
@@ -38,5 +41,55 @@
             margin: 0 auto;
             border-radius: 10px;
         }
+
+        @media (min-width: 800px) {
+            display: none;
+        }
     }
+
+    &-menu {
+        display: none;
+        font-size: 1.35rem;
+        color: white;
+
+        a {
+            color: white;
+
+            &:first-child {
+                border-left: 1px solid darken($color: $orange, $amount: 15);
+            }
+        }
+
+        a,
+        div {
+            border-right: 1px solid darken($color: $orange, $amount: 15);
+            padding: 20px 0;
+            width: 10vw;
+            text-align: center;
+            font-size: 1.1rem;
+
+            &:hover {
+                background: darken($color: $orange, $amount: 20);
+            }
+
+            @media (min-width: 1100px) {
+                width: 9vw;
+                font-size: 1.35rem;
+            }
+        }
+
+        @media (min-width: 800px) {
+            display: flex;
+        }
+    }
+}
+.ui.inverted.segment{
+    background-image: linear-gradient(-60deg, #16a085 0%, #f4d03f 100%);
+   a{
+    font-size: 20px;
+    color:white
+   }
+}
+.ui.divided.inverted.list>.item{
+    font-size: 20px;
 }

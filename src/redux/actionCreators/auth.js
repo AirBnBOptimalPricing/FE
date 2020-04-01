@@ -1,4 +1,9 @@
-import { AUTH_START, AUTH_FAILURE, AUTH_SUCCESS } from '../actions';
+import {
+    LOGIN_SUCCESS,
+    REGISTER_SUCCESS,
+    AUTH_START,
+    AUTH_FAILURE,
+} from '../actions';
 
 export const authStart = () => {
     return {
@@ -6,10 +11,16 @@ export const authStart = () => {
     };
 };
 
-export const authSuccess = payload => {
+export const loginSuccess = payload => {
     return {
-        type: AUTH_SUCCESS,
+        type: LOGIN_SUCCESS,
         payload,
+    };
+};
+
+export const registerSuccess = () => {
+    return {
+        type: REGISTER_SUCCESS,
     };
 };
 

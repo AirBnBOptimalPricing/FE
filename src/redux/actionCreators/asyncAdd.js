@@ -1,14 +1,14 @@
-// import { addStart, addFail, addSuccess } from './addProperty';
-// import { withAuth } from '../../util';
+import { addStart, addFail, addSuccess } from './addProperty';
+import { withAuth } from '../../util';
 export const addProperty = property => async dispatch => {
-    console.log('start');
-    // dispatch(addStart);
-    // const response = await withAuth('/api/property', post)
-    // dispatch(addSuccess(response.data))
-    console.log('finish');
+    dispatch(addStart());
     try {
+        const response = await withAuth('/user/property', 'post', property);
+        console.log(response);
+        dispatch(addSuccess(response.data));
+        return response.data; // data is id...
     } catch (error) {
-        // dispatch(addFail(error))
-        console.log('failure');
+        dispatch(addFail(error));
+        return error;
     }
 };

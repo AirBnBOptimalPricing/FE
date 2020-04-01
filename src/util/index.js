@@ -6,6 +6,7 @@ import { undoMapObject } from './undoMapObject';
 import { insertObjectToMap } from './insertObjectToMap';
 import { removeObjectFromMap } from './removeObjectFromMap';
 import { decodeToken } from './decodeToken';
+import { formatMoney } from './formatMoney';
 
 export {
     capitalize,
@@ -16,4 +17,5 @@ export {
     insertObjectToMap,
     removeObjectFromMap,
     decodeToken,
+    formatMoney,
 };

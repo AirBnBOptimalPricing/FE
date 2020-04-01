@@ -14,15 +14,10 @@ const Register = ({ errors, touched }) => {
             </header>
             <Form className="div1">
                 <div className="formCol">
-                    <Input
-                        type="text"
-                        name="username"
-                        placeholder="Username*"
-                    />
-                    {touched.username && errors.username && (
-                        <p className="errors"> {errors.username}</p>
+                    <Input type="email" name="email" placeholder="Email*" />
+                    {touched.email && errors.email && (
+                        <p className="errors">{errors.email}</p>
                     )}
-
                     <Input
                         type="password"
                         name="password"
@@ -54,15 +49,11 @@ const Register = ({ errors, touched }) => {
                         <p className="errors"> {errors.lastName}</p>
                     )}
 
-                    <Input type="email" name="email" placeholder="Email*" />
-                    {touched.email && errors.email && (
-                        <p className="errors">{errors.email}</p>
-                    )}
                     <p>
-                        Already have an account? <Link to="/login">LogIn</Link>
+                        Already have an account? <Link to="/login">Log in</Link>
                     </p>
                 </div>
-                <button type="submit"> SignUp </button>
+                <button type="submit"> Register </button>
             </Form>
         </div>
     );
@@ -70,7 +61,6 @@ const Register = ({ errors, touched }) => {
 const RegistrationForm = withFormik({
     mapPropsToValues(props) {
         return {
-            username: props.username || '',
             password: props.password || '',
             firstName: props.firstName || '',
             lastName: props.lastName || '',
@@ -79,10 +69,6 @@ const RegistrationForm = withFormik({
     },
 
     validationSchema: Yup.object().shape({
-        username: Yup.string()
-            .min(4, 'Username must be 4 characters minimum')
-            .max(15, 'Too Long!')
-            .required('Please add user name!'),
         password: Yup.string()
             .min(6, 'Password must be 6 characters minimum')
             .required('Please add password!'),

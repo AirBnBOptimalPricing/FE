@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { useLocation, useHistory } from 'react-router-dom';
+import { deleteProperty } from '../../redux/actionCreators';
 
 const PropertyCard = ({
     className = '',
@@ -11,12 +12,25 @@ const PropertyCard = ({
     zip,
     city,
     description,
+    propertyType,
+    floors,
+    beds,
+    baths,
     price,
-    owner,
+    user_id: owner,
+    deleteProperty,
+    refresh,
 }) => {
     const location = useLocation();
     const history = useHistory();
-    console.log(owner, loggedInAs);
+
+    const deletePropertyonClick = e => {
+        e.stopPropagation();
+        deleteProperty(id).then(() => {
+            history.push('/property');
+            refresh();
+        });
+    };
     return (
         <div
             onClick={e => {
@@ -35,27 +49,38 @@ const PropertyCard = ({
                 <section>
                     <div>
                         <p>{description}</p>
+                        {/* <p>{`A ${floors} ${propertyType} with ${beds} and ${baths}`}</p> // returns undefined */}
                         <p>Price: {`$${price}`}</p>
                     </div>
                 </section>
-                {/* {// conditionally render only if the owner is looking at them */}
-                {/* owner === loggedInAs.id && ( */}
-                <div className="property-controls">
-                    <div className="edit" onClick={e => e.stopPropagation()}>
-                        Edit
+                {// conditionally render only if the owner is looking at them
+                // commented due to the way BE made the property model without an owner property
+                owner === loggedInAs.id && (
+                    <div className="property-controls">
+                        <div
+                            className="edit"
+                            onClick={e => {
+                                e.stopPropagation();
+                                history.push(`/property/${id}/edit`);
+                            }}>
+                            Edit
+                        </div>
+                        <div className="delete" onClick={deletePropertyonClick}>
+                            Delete
+                        </div>
                     </div>
-                    <div className="delete" onClick={e => e.stopPropagation()}>
-                        Delete
-                    </div>
-                </div>
-                {/* )} */}
+                )}
             </div>
         </div>
     );
 };
 
-const mapStateToProps = ({ auth: { user } }) => {
-    return { loggedInAs: { ...user.loggedInAs } };
+const mapStateToProps = ({
+    auth: {
+        user: { loggedInAs },
+    },
+}) => {
+    return { loggedInAs: { ...loggedInAs } };
 };
 
-export default connect(mapStateToProps, {})(PropertyCard);
+export default connect(mapStateToProps, { deleteProperty })(PropertyCard);

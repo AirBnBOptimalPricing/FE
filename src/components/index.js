@@ -1,13 +1,18 @@
 import App from './App';
-import AddListing from './Form/AddListing';
-import DeleteListingButton from './Form/DeleteListingButton';
-import Login from './Form/Login';
-import Register from './Form/Register';
-import UpdateListing from './Form/UpdateListing';
+import {
+    AddListing,
+    DeleteListingButton,
+    Input,
+    Login,
+    Register,
+    UpdateListing,
+} from './Form';
 import PrivateRoute from './Route/PrivateRoute';
-import Input from './Form/Input';
-import Navigation from './Form/Navigation';
+import Navigation from './Navigation';
+import Footer from './Footer';
 import { Property, PropertyCard, Listing, ListingPage } from './Listing/';
+import { Modal, Backdrop, SideDrawerModal, Loader, LoadingModal } from './ui/';
+import NavMenu from './NavMenu';
 
 export {
     App,
@@ -23,4 +28,11 @@ export {
     PropertyCard,
     Property,
     ListingPage,
+    Modal,
+    Backdrop,
+    SideDrawerModal,
+    NavMenu,
+    Loader,
+    LoadingModal,
+    Footer,
 };

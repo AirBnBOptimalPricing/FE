@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect} from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
     AddListing,
@@ -12,6 +12,8 @@ import {
     Property,
     SideDrawerModal,
     LoadingModal,
+    Footer,
+    Home,
 } from './';
 function App({ setLoggedInUser }) {
     return (
@@ -21,6 +23,7 @@ function App({ setLoggedInUser }) {
             <LoadingModal />
             <div className="view">
                 <Switch>
+                    <Route exact path="/" component={Home} />
                     <Route path="/login" component={Login} />
                     <Route path="/register" component={Register} />
                     <PrivateRoute path="/property" exact component={Listing} />
@@ -43,6 +46,7 @@ function App({ setLoggedInUser }) {
                     <Redirect to="/login" />
                 </Switch>
             </div>
+            <Footer/>
         </div>
     );
 }

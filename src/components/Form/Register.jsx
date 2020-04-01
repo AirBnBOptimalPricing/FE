@@ -12,22 +12,8 @@ const Register = ({ errors, touched }) => {
             <header>
                 <h3 className="form-header">Register</h3>
             </header>
-            <Form className="div1">
-                <div className="formCol">
-                    <Input type="email" name="email" placeholder="Email*" />
-                    {touched.email && errors.email && (
-                        <p className="errors">{errors.email}</p>
-                    )}
-                    <Input
-                        type="password"
-                        name="password"
-                        placeholder="Password*"
-                    />
-                    {touched.password && errors.password && (
-                        <p className="errors">{errors.password}</p>
-                    )}
-
-                    <Input
+            <Form>
+                <Input
                         type="text"
                         name="firstName"
                         placeholder=" First Name*"
@@ -36,23 +22,35 @@ const Register = ({ errors, touched }) => {
                     {touched.firstName && errors.firstName && (
                         <p className="errors"> {errors.firstName}</p>
                     )}
-                </div>
-
-                <div className="formCol">
-                    <Input
-                        type="text"
-                        name="lastName"
-                        placeholder="lastName*"
-                        altText="Last Name"
-                    />
+                <Input
+                    type="text"
+                    name="lastName"
+                    placeholder="Last Name*"
+                    altText="Last Name"
+                />
                     {touched.lastName && errors.lastName && (
                         <p className="errors"> {errors.lastName}</p>
                     )}
 
-                    <p>
-                        Already have an account? <Link to="/login">Log in</Link>
-                    </p>
-                </div>
+                <Input 
+                    type="email" 
+                    name="email" 
+                    placeholder="Email*" 
+                />
+                    {touched.email && errors.email && (
+                        <p className="errors">{errors.email}</p>
+                    )}
+                <Input
+                    type="password"
+                    name="password"
+                    placeholder="Password*"
+                />
+                    {touched.password && errors.password && (
+                        <p className="errors">{errors.password}</p>
+                    )}
+                <p>
+                    Already have an account? <Link to="/login">Log in</Link>
+                </p>
                 <button type="submit"> Register </button>
             </Form>
         </div>

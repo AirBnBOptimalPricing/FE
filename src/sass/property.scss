@@ -31,7 +31,8 @@
             box-shadow: 1px 1px 5px rgb(75, 75, 75);
         }
         &:hover {
-            background: darken($color: white, $amount: 15);
+            background-image: linear-gradient(60deg, #abecd6 0%, #fbed96 100%);
+            // background: darken($color: white, $amount: 15);
             transform: scale(1.025);
             transition: all 0.25s;
         }
@@ -67,36 +68,27 @@
         justify-content: space-around;
         align-items: flex-end;
         & > div {
-            width: 40%;
+            width: 30%;
             box-shadow: 1.5px 1.5px 0 black;
             border-radius: 5px;
             text-align: center;
-            background: lighten($color: $blue, $amount: 10);
-            color: white;
-            font-weight: 800;
+            //background: lighten($color: $blue, $amount: 10);
+            background-image: linear-gradient(60deg, #abecd6 0%, #fbed96 100%);
+            color:black;
+            font-weight: 500;
             font-size: 1.5rem;
 
             &:hover {
-                background: lighten($color: $blue, $amount: 15);
+              // background: lighten($color: $blue, $amount: 15);
+              background-image: linear-gradient(-60deg, #16a085 0%, #f4d03f 100%);
             }
 
             &:active {
-                background: darken($color: $blue, $amount: 15);
+              //  background: darken($color: $blue, $amount: 15);
+              background-image: linear-gradient(-60deg, #16a085 0%, #f4d03f 100%);
                 box-shadow: 1px 1px 0 black inset;
             }
         }
-        .delete {
-            background: $red;
-
-            &:hover {
-                background: lighten($color: $red, $amount: 15);
-            }
-
-            &:active {
-                background: darken($color: $red, $amount: 15);
-            }
-        }
-
         @media (min-width: $medium) {
             margin-top: 30px;
         }

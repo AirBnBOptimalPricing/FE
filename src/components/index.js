@@ -9,9 +9,11 @@ import {
 } from './Form';
 import PrivateRoute from './Route/PrivateRoute';
 import Navigation from './Navigation';
+import Footer from './Footer';
 import { Property, PropertyCard, Listing, ListingPage } from './Listing/';
 import { Modal, Backdrop, SideDrawerModal, Loader, LoadingModal } from './ui/';
 import NavMenu from './NavMenu';
+import Home from './Home'
 
 export {
     App,
@@ -33,4 +35,6 @@ export {
     NavMenu,
     Loader,
     LoadingModal,
+    Footer,
+    Home,
 };

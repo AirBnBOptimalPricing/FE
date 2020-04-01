@@ -56,40 +56,50 @@ const AddForm = ({
     return (
         <div className="form">
             <header>
-                <h3 className="form-header">Add a property</h3>
+                <h3 className="form-header">Add a new listing</h3>
             </header>
             <Form>
-                <Input name="address" id="address" />
-                <Input name="city" id="city" />
-                <Input name="state" id="state" />
-                <Input name="zip" id="zip" />
-                <Input name="description" id="description" />
+                <div className="box">
+                <div className="address">
+                    <Input name="address" id="address" />
+                    <Input name="city" id="city" />
+                </div>
+                <div className="address">
+                    <Input name="state" id="state" />
+                    <Input name="zip" id="zip" />
+                </div>
+                </div>
 
-                <Input
-                    name="propertyType"
-                    id="property-type"
-                    altText="Property Type"
-                    inputClassName="ds-input"
-                    as="select">
-                    {propertyType}
-                </Input>
-                <Input
-                    name="neighborhoodGroup"
-                    id="neighborhood-group"
-                    altText="Neighborhood"
-                    inputClassName="ds-input"
-                    as="select">
-                    {neighborhoodGroup}
-                </Input>
+                <Input name="description" id="description"/>
+                <div className="suggest-dropdowns">
+                    <Input
+                        name="propertyType"
+                        id="property-type"
+                        altText="Property Type"
+                        inputClassName="ds-input"
+                        as="select">
+                        {propertyType}
+                    </Input>
+                    <Input
+                        name="neighborhoodGroup"
+                        id="neighborhood-group"
+                        altText="Neighborhood"
+                        inputClassName="ds-input"
+                        as="select">
+                        {neighborhoodGroup}
+                    </Input>
+                </div>
+               <div className="dropdowns">
                 <Input name="floors" as="select" id="floors">
-                    {floors}
-                </Input>
-                <Input name="beds" as="select" id="beds">
-                    {bedsAndBaths}
-                </Input>
-                <Input name="baths" as="select" id="baths">
-                    {bedsAndBaths}
-                </Input>
+                        {floors}
+                    </Input>
+                    <Input name="beds" as="select" id="beds">
+                        {bedsAndBaths}
+                    </Input>
+                    <Input name="baths" as="select" id="baths">
+                        {bedsAndBaths}
+                    </Input>
+               </div>
                 <Input name="amenities" id="amenities" />
                 <Input name="price" id="price" />
                 {amount && (

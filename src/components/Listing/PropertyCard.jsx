@@ -12,6 +12,10 @@ const PropertyCard = ({
     zip,
     city,
     description,
+    propertyType,
+    floors,
+    beds,
+    baths,
     price,
     user_id: owner,
     deleteProperty,
@@ -35,7 +39,7 @@ const PropertyCard = ({
             }}
             className={`${className} property card`.trim()}>
             <img
-                src="https://images.unsplash.com/photo-1559767949-0faa5c7e9992?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
+                src="https://images.unsplash.com/photo-1538685634737-24b83e3fa2f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80"
                 alt="placeholder"
             />
             <div className="property-info">
@@ -45,6 +49,7 @@ const PropertyCard = ({
                 <section>
                     <div>
                         <p>{description}</p>
+                        {/* <p>{`A ${floors} ${propertyType} with ${beds} and ${baths}`}</p> // returns undefined */}
                         <p>Price: {`$${price}`}</p>
                     </div>
                 </section>
@@ -60,8 +65,10 @@ const PropertyCard = ({
                             }}>
                             Edit
                         </div>
-                        <div className="delete" onClick={deletePropertyonClick}>
-                            Delete
+                        <div 
+                            className="delete" 
+                            onClick={deletePropertyonClick}>
+                            Clear
                         </div>
                     </div>
                 )}

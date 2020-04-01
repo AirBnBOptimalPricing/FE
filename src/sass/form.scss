@@ -1,5 +1,9 @@
 .form {
     font-size: 1.25rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
     &-header {
         text-align: center;
@@ -14,7 +18,8 @@
     }
 
     button {
-        background: lighten($color: $blue, $amount: 5);
+        //background: lighten($color: $blue, $amount: 5);
+        background-image: linear-gradient(-60deg, #16a085 0%, #f4d03f 100%);
         color: white;
     }
 
@@ -23,56 +28,91 @@
         font-weight: 600;
         padding: 7px 15px;
     }
-}
-
-.form-input {
-    display: flex;
-    margin-bottom: 10px;
-    justify-content: space-between;
-    padding: 0 5%;
-
-    &.checkbox {
-        display: flex;
-        align-items: center;
-
-        [type='checkbox'] {
-            margin-right: 10px;
-            width: 16px;
-            height: 16px;
-        }
-        label {
-            padding-top: 3px;
-        }
-    }
-
-    select.ds-input {
-        width: 70%;
-        @media (min-width: $medium) {
-            width: 65%;
-        }
-    }
 
     @media (min-width: $medium) {
-        font-size: 1.75rem;
-        margin-bottom: 20px;
+        .box{
+            width: 100%;
+            display: flex;
+            flex-direction:row ;
+            padding: 0 3%;
+
+            .address{
+                width: 100%;
+                flex-direction: row;
+            }
+        }
+        .suggest-dropdowns{
+            display: flex;
+            flex-direction: row;
+        }
     }
 }
-
-.checkbox {
-    & > label {
-        margin-left: 10px;
-        margin-right: auto;
-    }
-}
-
-.suggested-price-field {
-    font-size: 1rem;
-    padding: 0;
-    width: 70%;
-    margin-left: auto;
+.dropdowns{
     display: flex;
-    transform: translateY(-10px);
-    & > p {
-        width: auto;
+    flex-direction: row; 
+    justify-content: space-between;
+}
+form{
+    margin-left: 15%;
+    .form-input {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+        justify-content: space-between;
+        padding: 0 5%;
+
+        &.checkbox {
+            display: flex;
+            flex-direction: row;
+            justify-content:left;
+            align-items: center;
+
+            [type='checkbox'] {
+                margin-right: 60%;
+                width: 16px;
+                height: 16px;
+            }
+            label {
+                padding-top: 0px;
+            }
+        }
+
+        select.ds-input {
+            width: 100%;
+            @media (min-width: $medium) {
+                width: 100%;
+            }
+        }
+
+        @media (min-width: $medium) {
+            font-size: 1.75rem;
+            margin-bottom: 20px;
+        }
     }
+
+    .checkbox {
+        & > label {
+            margin-left: 0px;
+            margin-right: auto;
+        }
+    }
+
+    .suggested-price-field {
+        font-size: 1.25rem;
+        color:green;
+        padding: 0 1%;
+        width: 75%;
+        // justify-content: space-between;
+        // margin-left: auto;
+        display: flex;
+        transform: translateY(-10px);
+        & > p {
+            width: auto;
+        }
+        @media (min-width: $medium) {
+            font-size: 1.75rem;
+            margin-bottom: 20px;
+        }
+    }
+   
 }

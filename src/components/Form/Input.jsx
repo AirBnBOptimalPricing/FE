@@ -25,14 +25,15 @@ const Input = ({
                 </>
             ) : (
                 <>
+                     <label htmlFor={id}>
+                        {altText || capitalize(props.name)}
+                    </label>
                     <Field
                         {...props}
                         id={id}
                         className={`${inputClassName}`.trim()}
                     />
-                    <label htmlFor={id}>
-                        {altText || capitalize(props.name)}
-                    </label>
+                    
                 </>
             )}
         </div>

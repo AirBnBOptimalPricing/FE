@@ -12,14 +12,15 @@ const PropertyCard = ({
     zip,
     city,
     description,
-    propertyType,
+    property_type,
     floors,
-    beds,
-    baths,
+    bedrooms_number,
+    bathrooms_number,
     price,
     user_id: owner,
     deleteProperty,
     refresh,
+    user_id,
 }) => {
     const location = useLocation();
     const history = useHistory();
@@ -35,7 +36,7 @@ const PropertyCard = ({
         <div
             onClick={e => {
                 e.stopPropagation();
-                history.push(`${location.pathname}/${id}`);
+                history.push(`property/${user_id}`);
             }}
             className={`${className} property card`.trim()}>
             <img
@@ -49,7 +50,7 @@ const PropertyCard = ({
                 <section>
                     <div>
                         <p>{description}</p>
-                        {/* <p>{`A ${floors} ${propertyType} with ${beds} and ${baths}`}</p> // returns undefined */}
+                        <p>{`A ${property_type} with ${bedrooms_number} beds and ${bathrooms_number} bathrooms`}</p> 
                         <p>Price: {`$${price}`}</p>
                     </div>
                 </section>

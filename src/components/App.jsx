@@ -14,6 +14,7 @@ import {
     LoadingModal,
     Footer,
     Home,
+    ListingPage
 } from './';
 function App({ setLoggedInUser }) {
     return (
@@ -34,6 +35,12 @@ function App({ setLoggedInUser }) {
                         component={AddListing}
                     />
                     <PrivateRoute
+                        path="/listing/:id"
+                        exact
+                        component={ListingPage}
+                    />
+                    
+                    <PrivateRoute
                         path="/property/:id"
                         component={Property}
                         exact
@@ -43,7 +50,8 @@ function App({ setLoggedInUser }) {
                         path="/property/:id/edit"
                         component={UpdateListing}
                     />
-                    <Redirect to="/login" />
+                    {/* <Redirect to="/login" */}
+                     />
                 </Switch>
             </div>
             <Footer/>

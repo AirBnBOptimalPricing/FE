@@ -8,7 +8,7 @@ import { login } from '../../redux/actionCreators';
 
 function Login({ errors, touched, error }) {
     return (
-        <div className="form">
+        <div className="form login">
             <header>
                 <h3 className="form-header">Login</h3>
             </header>

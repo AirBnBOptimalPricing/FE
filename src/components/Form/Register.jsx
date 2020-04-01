@@ -8,7 +8,7 @@ import { register } from '../../redux/actionCreators';
 
 const Register = ({ errors, touched }) => {
     return (
-        <div className="form">
+        <div className="form register">
             <header>
                 <h3 className="form-header">Register</h3>
             </header>

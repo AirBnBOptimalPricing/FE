@@ -21,7 +21,7 @@ const getSuccess = data => {
 const getSinglePropertySuccess = data => {
     return {
         type: GET_SINGLE_PROPERTY_SUCCESS,
-        payload: data,
+        payload: data.properties,
     };
 };
 
@@ -46,7 +46,7 @@ export const getSingleProperty = id => async dispatch => {
     dispatch(getStart());
     try {
         const response = await withAuth(`/user/${id}`, 'get');
-        dispatch(getSinglePropertySuccess(response.data));
+        dispatch(getSinglePropertySuccess(response.data.properties));
         dispatch(setLoggedInUser());
         return;
     } catch (error) {

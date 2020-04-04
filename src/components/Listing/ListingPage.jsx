@@ -60,8 +60,9 @@ const ListingPage = () => {
     return (
         <div>
          <div>Card development in process</div>
-            {/* {data.properties.map((item)=>( 
-                console.log(item, "item in listing page" ) */}
+           {data.properties.map((item)=>(  
+            <div>
+                {item.map((x)=>(
                 <Card>
                     <CardBody className="card-listing" >
                         <div className="card-image">
@@ -69,13 +70,13 @@ const ListingPage = () => {
                         </div>
                         <div className="card-info">
                             <div className ="edit-div">
-                            <CardTitle>Title:</CardTitle>  
+                            <CardTitle>Title:{x.address}</CardTitle>  
                                 <div>
                                     <i class="fa fa-edit"></i>
                                     <i class="fa fa-trash"></i>
                                 </div>
                                 </div>
-                           {/* <CardSubtitle>Address: {item.city}, {item.state}, {item.zip} </CardSubtitle> */}
+                        <CardSubtitle>Address: {x.city}, {x.state}, {x.zip} </CardSubtitle> 
                             <CardSubtitle>Nr of guests, beds, baths </CardSubtitle>
                             <CardSubtitle>Description:ListingPageType and floors </CardSubtitle>
                             <CardSubtitle>Amenities: </CardSubtitle>
@@ -83,7 +84,9 @@ const ListingPage = () => {
                         </div>
                     </CardBody>
                 </Card>
-            {/* ))}  */}
+               ))}
+            </div>
+            ))} 
         </div> 
     )
 };

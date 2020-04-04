@@ -82,14 +82,14 @@ const Property = (props) => {
     //     });
     // };
     const [data, setData]=useState(initialState);
-    console.log(data,"data")
+   //console.log(data,"data")
     const { id } = useParams();
     const history = useHistory();
 
     useEffect(() => {
        withAuth(`/user/${id}`, 'get')
           .then((response) => {
-         console.log("hereeee", response.data)
+       //  console.log("hereeee", response.data)
           setData(response.data)
           })
           .catch((err) => (err));
@@ -102,7 +102,7 @@ const Property = (props) => {
             {data.properties.map((item)=> (
                 <div 
                 className={`${props.className} property listing`.trim()}
-                //onClick={() => history.push(`/listing/${item.id}/`)}
+               // onClick={() => history.push(`/listing/${item.id}/`)}
                 >
                     <img
                         src="https://images.unsplash.com/photo-1538685634737-24b83e3fa2f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80"
